@@ -48,7 +48,7 @@ export default function Home() {
             
             <ProjectCard 
               company="PEDULI LINDUNGI"
-              name="[Project Name Two]"
+              name="Designing crowd insights for Indonesia's COVID-19 tracing app"
               description="Architecting a scalable design system that unified 14 different sub-brands under one cohesive visual language while reducing developer handoff time by 40%."
               tags="WEB · DESIGN SYSTEM"
               imageFallbackGradient="linear-gradient(135deg, #0d0d0d 0%, #1f1f1f 100%)"
