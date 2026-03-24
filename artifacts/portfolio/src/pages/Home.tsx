@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -6,11 +7,22 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectIndex } from "@/components/ProjectIndex";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
+import { SplashScreen } from "@/components/SplashScreen";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const [splashDone, setSplashDone] = useState(false);
+
   return (
-    <div className="min-h-screen bg-background w-full selection:bg-accent selection:text-background relative">
+    <>
+      {!splashDone && <SplashScreen onComplete={() => setSplashDone(true)} />}
+      <div
+        className="min-h-screen bg-background w-full selection:bg-accent selection:text-background relative"
+        style={{
+          opacity: splashDone ? 1 : 0,
+          transition: "opacity 0.5s ease",
+        }}
+      >
       {/* Noise Texture Overlay */}
       <div className="noise-overlay" />
       
@@ -84,5 +96,6 @@ export default function Home() {
         <Contact />
       </main>
     </div>
+    </>
   );
 }

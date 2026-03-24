@@ -1,0 +1,62 @@
+Before the main portfolio page loads, add a full-screen splash/intro screen 
+with the following behavior:
+
+---
+
+VISUAL DESIGN:
+- Background: near-black (#0D0D0D) with a subtle CSS noise/grain texture 
+  overlay (use SVG filter or a repeating CSS noise pattern)
+- The grain should feel like analog film — slightly coarse, not digital noise
+- Center of screen: a single line of serif italic text (use "Cormorant Garamond" 
+  or "Playfair Display" in italic, font-weight 300–400)
+- Text color: off-white/cream (#E8E0D0), opacity starts at 0
+
+---
+
+TEXT & ANIMATION SEQUENCE (total duration: 8–10 seconds):
+
+Step 1 (0s – 0.5s): 
+  Screen is completely black. Grain texture fades in slowly.
+
+Step 2 (0.5s – 5.5s): 
+  Typewriter animation — type out this exact text character by character:
+  "Fear of the Lord is beginning of wisdom..."
+  Typing speed: approximately 50ms per character
+  Include a blinking cursor ( | ) while typing is in progress
+
+Step 3 (5.5s – 7.5s):
+  Text stays fully visible. Cursor disappears. 
+  Brief pause — let the quote breathe.
+
+Step 4 (7.5s – 9.5s):
+  The entire splash screen fades out (opacity 1 → 0), 
+  transitioning into the main portfolio page underneath.
+  Use CSS transition: opacity 1.5s ease-in-out.
+
+Step 5 (9.5s):
+  Splash screen is removed from DOM (display: none or unmounted).
+  Main portfolio page becomes fully visible and interactive.
+
+---
+
+TECHNICAL REQUIREMENTS:
+- Build this as a React component: <SplashScreen onComplete={callback} />
+- It should sit on top of (z-index above) the main App content
+- The main portfolio content should be rendered in the background 
+  but hidden (opacity: 0) during the splash, so it loads in parallel
+- Once splash completes, main content fades in (opacity 0 → 1, 
+  transition 0.5s ease)
+- Add a skip button (small, top-right corner, subtle): "skip →" 
+  Clicking it immediately jumps to the main page
+- Do NOT use any external animation libraries — CSS transitions + 
+  vanilla JS setTimeout only
+
+---
+
+GRAIN TEXTURE (CSS):
+Implement the grain using this approach:
+  Create a pseudo-element (::after) on the splash div with:
+  - SVG-based feTurbulence noise filter, OR
+  - A base64 PNG noise image as background-image, repeated
+  - opacity: 0.08–0.12 (subtle, not overwhelming)
+  - mix-blend-mode: overlay

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -200,4 +201,19 @@
   .animate-marquee-reverse {
     animation: marquee 25s linear infinite reverse;
   }
+}
+
+@keyframes splash-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.splash-cursor {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.9em;
+  background-color: #E8E0D0;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: splash-blink 0.8s step-end infinite;
 }
