@@ -44,7 +44,7 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
           <img 
             src={imageUrl} 
             alt={name}
-            className="absolute inset-0 w-full h-full object-cover z-10 opacity-80 mix-blend-luminosity transition-opacity duration-500 group-hover:opacity-100"
+            className="absolute inset-0 w-full h-full object-cover z-10 opacity-80 mix-blend-luminosity transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal"
           />
         )}
 
