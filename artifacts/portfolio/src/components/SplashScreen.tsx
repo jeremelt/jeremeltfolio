@@ -45,7 +45,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         i++;
         setDisplayedText(TEXT.slice(0, i));
         if (i < TEXT.length) {
-          const delay = 90 + Math.random() * 80 + (TEXT[i - 1] === " " ? 40 : 0);
+          const delay = 45 + Math.random() * 30 + (TEXT[i - 1] === " " ? 15 : 0);
           const t = setTimeout(typeNext, delay);
           timersRef.current.push(t);
         }
@@ -54,8 +54,8 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       timersRef.current.push(t);
     }, 500);
 
-    add(() => setShowCursor(false), 9000);
-    add(complete, 11000);
+    add(() => setShowCursor(false), 4200);
+    add(complete, 4200);
 
     return () => timersRef.current.forEach(clearTimeout);
   }, [complete]);
