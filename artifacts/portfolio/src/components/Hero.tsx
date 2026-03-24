@@ -125,6 +125,7 @@ export function Hero() {
             {/* "Jeremy" */}
             <motion.span
               className="inline-block cursor-none"
+              data-cursor="hover"
               onMouseEnter={() => setIsJeremyHovered(true)}
               onMouseLeave={() => setIsJeremyHovered(false)}
               animate={{ opacity: isDesignerHovered ? 0.2 : 1 }}
@@ -145,6 +146,7 @@ export function Hero() {
             {/* "Designer." */}
             <motion.span
               className="inline-block cursor-none"
+              data-cursor="hover"
               onMouseEnter={() => setIsDesignerHovered(true)}
               onMouseLeave={() => setIsDesignerHovered(false)}
               animate={{ opacity: isJeremyHovered ? 0.2 : 1 }}
