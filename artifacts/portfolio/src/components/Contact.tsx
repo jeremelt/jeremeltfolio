@@ -30,9 +30,7 @@ export function Contact() {
           className="inline-block group"
         >
           <div className="flex items-center space-x-6">
-            <span className="font-sans text-xl md:text-3xl text-accent underline underline-offset-8 decoration-accent/30 group-hover:decoration-accent transition-all duration-300">
-              [your@email.com]
-            </span>
+            <span className="font-sans text-xl md:text-3xl text-accent underline underline-offset-8 decoration-accent/30 group-hover:decoration-accent transition-all duration-300">jeremymeldika@gmail.com</span>
             <div className="w-12 h-12 rounded-full border border-accent flex items-center justify-center text-accent transform transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:bg-accent group-hover:text-background">
               ↗
             </div>
