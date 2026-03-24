@@ -1,0 +1,130 @@
+
+
+Build me a single-page portfolio website for a Product Designer. 
+The aesthetic reference is philliplee.co — editorial, bold typography, 
+personality-driven, with a dark/muted color palette and strong use of 
+whitespace. NOT a generic template. It should feel like a magazine 
+layout crossed with a design portfolio.
+
+---
+
+TECH STACK:
+- React (Vite)
+- Tailwind CSS
+- No external UI libraries (custom components only)
+- Smooth scroll between sections
+- Mobile responsive
+
+---
+
+AESTHETIC DIRECTION:
+- Dark background (near-black, like #0D0D0D or #111111)
+- Off-white / cream text (not pure white)
+- One accent color: [electric lime #C8F04E]
+- Typography: use Google Fonts — pair a bold serif/display font for headings 
+  (e.g. "Playfair Display", "DM Serif Display", or "Cormorant Garamond") 
+  with a clean sans-serif for body (e.g. "DM Sans" or "Outfit")
+- Marquee/ticker text animations (like "CASE STUDY — PRODUCT DESIGN — 
+  UX — [your name] —" scrolling horizontally)
+- Hover effects on project cards (slight scale + overlay reveal)
+- Staggered fade-in on scroll (use Intersection Observer)
+
+---
+
+SECTIONS (in this order):
+
+1. HERO
+   - Full-screen opening
+   - Large headline: "[YOUR NAME] is a Product Designer"
+   - Subtext: "[Your 1-sentence tagline about what you do / who you are]"
+   - Subtle background texture or noise grain effect
+   - CTA button: "See My Work" → scrolls to Featured section
+   - Your current role/status: "[e.g., Currently designing at X / 
+     Open to opportunities]"
+
+2. FEATURED PROJECTS (3–4 cards)
+   For each project, display:
+   - Project cover image (placeholder for now, I'll replace later)
+   - Label: "CASE STUDY" or "PROJECT"
+   - Company/Client name (large)
+   - Project subtitle (medium)
+   - 1-sentence description
+   - Tags: e.g., "UX DESIGN · PRODUCT STRATEGY"
+   - Arrow CTA linking to detail page or external link
+   
+   Projects to include:
+   ===
+   Project 1:
+   - Name: [PROJECT NAME]
+   - Client/Company: [CLIENT]
+   - Description: [1-2 sentences about what you did]
+   - Tags: [e.g., UI/UX · MOBILE · iOS]
+   - Link: [URL or "#" if no link yet]
+   
+   Project 2:
+   - Name: [PROJECT NAME]
+   - Client/Company: [CLIENT]
+   - Description: [1-2 sentences]
+   - Tags: [e.g., WEB · DESIGN SYSTEM]
+   - Link: [URL or "#"]
+   
+   Project 3:
+   - Name: [PROJECT NAME]
+   - Client/Company: [CLIENT]
+   - Description: [1-2 sentences]
+   - Tags: [TAGS]
+   - Link: [URL or "#"]
+   ===
+
+3. PROJECT INDEX / LIBRARY (table list style)
+   A numbered list of ALL projects in a clean table format:
+   Columns: No. | Project Name | Platform/Type | Category | Status (→ or 🔒)
+   
+   List:
+   ===
+   01 | [Project Name] | [e.g., iOS App] | [e.g., Product Design] | [link or locked]
+   02 | [Project Name] | [e.g., Web] | [e.g., Branding] | [link or locked]
+   03 | [Project Name] | [e.g., Dashboard] | [e.g., UX Research] | [link]
+   [add more as needed]
+   ===
+
+4. ABOUT
+   - 2–3 paragraph bio written in first or third person — personality-driven, 
+     not a bland LinkedIn bio
+   - "Currently based in [city]"
+   - Past companies / experience:
+     [e.g., "Previously at Tokopedia · GoTo · Traveloka"]
+   - Skills & Tools section displayed as tag pills or inline list:
+     [e.g., Figma · Prototyping · Design Systems · User Research · 
+      Usability Testing · Framer · Notion · Miro]
+
+5. CONTACT / FOOTER
+   - Headline: "Say hi or stalk me online."
+   - Email CTA button: [your email]
+   - Social links (displayed as large text links with arrows):
+     · LinkedIn → [URL]
+     · Behance / Dribbble → [URL]
+     · Instagram → [URL]
+     · [any other platform]
+   - Footer note: "Designed & built by [Your Name] · [Year]"
+
+---
+
+INTERACTIONS & POLISH:
+- Horizontal marquee ticker between sections with text like: 
+  "PRODUCT DESIGN · UX · [YOUR NAME] · CASE STUDY · VISUAL DESIGN ·"
+- All nav links smooth-scroll to sections
+- Active nav highlight based on scroll position
+- Project cards: on hover, show a subtle image overlay + scale-up 
+  effect (CSS transition)
+- Entrance animations: staggered fade-up on scroll for each section 
+  (use IntersectionObserver)
+- Custom cursor optional but nice to have
+
+---
+
+PLACEHOLDER NOTE:
+For all project images, use placeholder divs with the aspect ratio 16:9 
+and a gradient background. I will replace them with real images later. 
+Label each placeholder clearly in comments like: 
+/* PROJECT_IMAGE_1 - replace with actual screenshot */

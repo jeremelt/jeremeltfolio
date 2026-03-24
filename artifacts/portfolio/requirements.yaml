@@ -1,0 +1,18 @@
+packages:
+  "framer-motion": "For premium scroll reveal animations and smooth UI transitions"
+
+images:
+  - path: "artifacts/portfolio/public/images/project-1.png"
+    description: "Abstract 3D rendering of soft geometric shapes in dark gray and electric lime green lighting, premium editorial style, high resolution, soft shadows"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/project-2.png"
+    description: "Macro photography of textured dark glass with subtle glowing electric lime edges, abstract tech background, moody and sophisticated"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/project-3.png"
+    description: "Minimalist brutalist architecture interior, dark concrete walls with a single beam of vibrant green light, high contrast, cinematic"
+    aspect_ratio: "16:9"
+
+notes:
+  - Static frontend only, no API integration required.
+  - Using Framer Motion for scroll reveal animations.
+  - Implemented custom cursor as requested.

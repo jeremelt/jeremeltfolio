@@ -1,0 +1,83 @@
+import { motion } from "framer-motion";
+
+interface ProjectCardProps {
+  company: string;
+  name: string;
+  description: string;
+  tags: string;
+  imageFallbackGradient: string;
+  imageUrl?: string;
+}
+
+export function ProjectCard({ company, name, description, tags, imageFallbackGradient, imageUrl }: ProjectCardProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="group block w-full mb-32 last:mb-0 cursor-none"
+    >
+      <div className="relative w-full aspect-[4/5] md:aspect-[16/9] overflow-hidden rounded-sm mb-8 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+        
+        {/* Fallback gradient as requested in requirements */}
+        <div 
+          className="absolute inset-0 w-full h-full z-0"
+          style={{ background: imageFallbackGradient }}
+        />
+        
+        {/* Placeholder comment visually rendered for development clarity as requested */}
+        <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-white/30 uppercase tracking-widest mix-blend-overlay hidden md:block">
+          // Placeholder image area (16:9 aspect ratio)
+        </div>
+
+        {/* The actual image (layered on top if provided) */}
+        {imageUrl && (
+          <img 
+            src={imageUrl} 
+            alt={name}
+            className="absolute inset-0 w-full h-full object-cover z-10 opacity-80 mix-blend-luminosity transition-opacity duration-500 group-hover:opacity-100"
+          />
+        )}
+
+        {/* Dark overlay that intensifies on hover */}
+        <div className="absolute inset-0 bg-black/20 z-20 transition-opacity duration-500 group-hover:bg-black/40" />
+
+        {/* Badge inside image area */}
+        <div className="absolute top-6 left-6 z-30">
+          <div className="px-3 py-1 bg-background/90 backdrop-blur-sm border border-border rounded-full flex items-center">
+            <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
+            <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-foreground">
+              Case Study
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        <div className="md:col-span-8">
+          <div className="font-sans text-sm font-medium tracking-widest text-accent uppercase mb-4">
+            {company}
+          </div>
+          <h3 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4 group-hover:text-accent transition-colors duration-300">
+            {name}
+          </h3>
+          <p className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
+            {description}
+          </p>
+        </div>
+        
+        <div className="md:col-span-4 flex flex-col md:items-end justify-between h-full pt-2">
+          <div className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase mb-8 md:text-right">
+            {tags}
+          </div>
+          
+          <button className="flex items-center space-x-2 font-sans text-sm tracking-widest uppercase text-foreground group-hover:text-accent transition-colors border-b border-transparent group-hover:border-accent pb-1 w-fit">
+            <span>View Case Study</span>
+            <span className="transform transition-transform duration-300 group-hover:translate-x-2">→</span>
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
