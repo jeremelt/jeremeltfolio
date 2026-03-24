@@ -65,6 +65,7 @@ export default function Home() {
               tags="UX RESEARCH · STRATEGY"
               imageFallbackGradient="linear-gradient(135deg, #111111 0%, #222222 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-3.png`}
+              badge="CASE STUDY"
             />
           </div>
         </section>
