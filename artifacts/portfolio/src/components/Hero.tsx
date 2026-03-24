@@ -77,10 +77,10 @@ export function Hero() {
           >
             <div className="relative flex shadow-2xl" style={{ width: 260, borderRadius: 8, overflow: "hidden", background: "#D5CFC0" }}>
               {/* Sidebar */}
-              <div className="flex-shrink-0 flex flex-col justify-around items-center py-4" style={{ width: 22, background: "#C8C2B2" }}>
-                {[0, 1, 2, 3].map((i) => (
-                  <span key={i} style={{ ...SIDEBAR_STYLE, color: "#7a7468" }}>EDITOR&apos;S NOTE</span>
-                ))}
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#C8C2B2", alignSelf: "stretch" }}>
+                <span style={{ ...SIDEBAR_STYLE, color: "#7a7468" }}>
+                  EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE
+                </span>
               </div>
               {/* Content */}
               <div className="flex-1 flex flex-col" style={{ padding: "14px 14px 18px 12px" }}>
@@ -117,10 +117,10 @@ export function Hero() {
           >
             <div className="relative flex shadow-2xl" style={{ width: 310, borderRadius: 8, overflow: "hidden", background: "#8BAF9F" }}>
               {/* Sidebar */}
-              <div className="flex-shrink-0 flex flex-col justify-around items-center py-4" style={{ width: 22, background: "#7A9E8E" }}>
-                {[0, 1, 2].map((i) => (
-                  <span key={i} style={{ ...SIDEBAR_STYLE, color: "#4a7060" }}>EDITOR&apos;S NOTE</span>
-                ))}
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#7A9E8E", alignSelf: "stretch" }}>
+                <span style={{ ...SIDEBAR_STYLE, color: "#4a7060" }}>
+                  EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE
+                </span>
               </div>
               {/* Content */}
               <div style={{ flex: 1, padding: "22px 20px 16px 16px", display: "flex", alignItems: "center" }}>

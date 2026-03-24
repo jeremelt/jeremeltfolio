@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 
 interface MarqueeProps {
   text: string;
@@ -7,41 +8,49 @@ interface MarqueeProps {
 
 export function Marquee({ text, reverse = false }: MarqueeProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const items = Array(4).fill(text);
+  const isHoveredRef = useRef(false);
+  const speedRef = useRef(0.12);
+  const x = useMotionValue(0);
+  const innerRef = useRef<HTMLDivElement>(null);
 
-  const animationStyle = {
-    animationDuration: isHovered ? "70s" : "25s",
-    animationDirection: reverse ? "reverse" : "normal" as const,
-    transition: "animation-duration 0.6s ease",
-  };
+  const items = Array(8).fill(text);
+
+  useAnimationFrame((_, delta) => {
+    const targetSpeed = isHoveredRef.current ? 0.03 : 0.12;
+    speedRef.current += (targetSpeed - speedRef.current) * 0.06;
+
+    const direction = reverse ? 1 : -1;
+    let newX = x.get() + direction * speedRef.current * delta;
+
+    if (innerRef.current) {
+      const halfWidth = innerRef.current.scrollWidth / 2;
+      if (!reverse && newX <= -halfWidth) newX += halfWidth;
+      if (reverse && newX >= 0) newX -= halfWidth;
+    }
+
+    x.set(newX);
+  });
 
   return (
     <div
       className="w-full overflow-hidden bg-background border-y border-border py-6 relative flex items-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => { setIsHovered(true); isHoveredRef.current = true; }}
+      onMouseLeave={() => { setIsHovered(false); isHoveredRef.current = false; }}
     >
-      <div
-        className="flex whitespace-nowrap w-max animate-marquee"
-        style={animationStyle}
+      <motion.div
+        ref={innerRef}
+        className="flex whitespace-nowrap"
+        style={{ x }}
       >
         {items.map((item, i) => (
           <span
             key={i}
-            className="text-foreground font-sans text-sm md:text-base tracking-[0.25em] uppercase mx-4 flex-shrink-0 flex items-center font-normal"
+            className="text-foreground font-sans text-sm md:text-base tracking-[0.25em] uppercase mx-6 flex-shrink-0 flex items-center font-normal"
           >
             {item}
           </span>
         ))}
-        {items.map((item, i) => (
-          <span
-            key={`dup-${i}`}
-            className="text-foreground font-sans text-sm md:text-base font-medium tracking-[0.25em] uppercase mx-4 flex-shrink-0 flex items-center"
-          >
-            {item}
-          </span>
-        ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
