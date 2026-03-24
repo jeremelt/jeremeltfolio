@@ -41,16 +41,21 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       setTextOpacity(1);
       setShowCursor(true);
       let i = 0;
-      const interval = setInterval(() => {
+      const typeNext = () => {
         i++;
         setDisplayedText(TEXT.slice(0, i));
-        if (i >= TEXT.length) clearInterval(interval);
-      }, 50);
-      timersRef.current.push(interval as unknown as ReturnType<typeof setTimeout>);
+        if (i < TEXT.length) {
+          const delay = 90 + Math.random() * 80 + (TEXT[i - 1] === " " ? 40 : 0);
+          const t = setTimeout(typeNext, delay);
+          timersRef.current.push(t);
+        }
+      };
+      const t = setTimeout(typeNext, 0);
+      timersRef.current.push(t);
     }, 500);
 
-    add(() => setShowCursor(false), 5500);
-    add(complete, 7500);
+    add(() => setShowCursor(false), 9000);
+    add(complete, 11000);
 
     return () => timersRef.current.forEach(clearTimeout);
   }, [complete]);
@@ -88,7 +93,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
       <p
         style={{
-          fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
+          fontFamily: "'PP Kyoto', Georgia, serif",
           fontStyle: "italic",
           fontWeight: 300,
           fontSize: "clamp(1.1rem, 2.5vw, 1.75rem)",
