@@ -19,7 +19,7 @@ export function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-5xl md:text-7xl lg:text-[100px] leading-[0.9] tracking-tight mb-12 max-w-4xl"
         >
-          Say hi or stalk me <span className="italic text-[#c7ee4e]">online.</span>
+          Say hi or stalk him <span className="italic text-[#c7ee4e]">online.</span>
         </motion.h2>
 
         <motion.a
