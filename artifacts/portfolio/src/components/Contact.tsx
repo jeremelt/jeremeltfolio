@@ -63,7 +63,7 @@ export function Contact() {
       <div className="w-full h-px bg-border/50 mb-8" />
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
         <p className="text-[10px]">Designed & built using Replit</p>
-        <p className="mt-2 md:mt-0">© 2025 ALL RIGHTS RESERVED</p>
+        <p className="mt-2 md:mt-0 text-[10px]">© 2026 ALL RIGHTS RESERVED</p>
       </div>
     </section>
   );
