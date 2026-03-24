@@ -37,7 +37,7 @@ export default function Home() {
         <Marquee text="Product Designer · UI/UX Designer · Bachelor of Architecture · Photography & Art Enthusiast · " />
         
         {/* Featured Projects Section */}
-        <section id="projects" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
+        <section id="projects" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto w-full overflow-x-hidden">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -26,7 +26,7 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
       onClick={handleClick}
       className={`group block w-full mb-32 last:mb-0 cursor-none${link ? " cursor-pointer" : ""}`}
     >
-      <div className="relative w-full aspect-[4/5] md:aspect-[16/9] overflow-hidden rounded-sm mb-8 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+      <div className="relative aspect-[4/5] md:aspect-[16/9] overflow-hidden rounded-sm mb-8 transition-transform duration-500 ease-out group-hover:scale-[1.02] w-[calc(100%+3rem)] -ml-6 md:w-full md:ml-0">
         
         {/* Fallback gradient as requested in requirements */}
         <div 
