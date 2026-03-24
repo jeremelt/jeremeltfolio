@@ -71,7 +71,7 @@ export function About() {
             className="space-y-8 font-sans text-xl md:text-2xl text-foreground leading-relaxed font-light"
           >
             <p>
-              I'm a designer who believes that form and function are not separate entities, but two sides of the same coin. I design digital products that respect the user's intelligence and time, rejecting dark patterns in favor of clarity and delight.
+              I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms.
             </p>
             <p className="text-muted-foreground">
               My journey started in architecture before shifting to digital product. That structural foundation informs my approach: build a solid skeleton first, then obsess over the finishes. Previously, I've shaped experiences at <span className="text-foreground">[Company A]</span>, <span className="text-foreground">[Company B]</span>, and <span className="text-foreground">[Company C]</span>.
