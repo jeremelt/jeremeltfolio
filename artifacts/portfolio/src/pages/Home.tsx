@@ -54,6 +54,8 @@ export default function Home() {
               imageFallbackGradient="linear-gradient(135deg, #0d0d0d 0%, #1f1f1f 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-2.png`}
               badge="CASE STUDY"
+              ctaLabel="VIEW CASE STUDY"
+              link="https://jeremelt.notion.site/Case-study-Peduli-Lindungi-2eb5137bc09a80aeb43de61cd1c1ddb0"
             />
             
             <ProjectCard 
