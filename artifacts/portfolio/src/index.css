@@ -1,7 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-Extrabold_1774333607911.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-ExtraboldItalic_1774333607920.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-Medium_1774333607921.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-MediumItalic_1774333607922.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-Light_1774333607920.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-LightItalic_1774333607921.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-Thin_1774333607923.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Kyoto';
+  src: url('@assets/PPKyoto-ThinItalic_1774333607924.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -35,7 +99,7 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
 
   --font-sans: 'DM Sans', sans-serif;
-  --font-display: 'DM Serif Display', serif;
+  --font-display: 'PP Kyoto', serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
