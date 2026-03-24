@@ -43,6 +43,7 @@ export default function Home() {
               tags="UI/UX · MOBILE · iOS"
               imageFallbackGradient="linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-1.png`}
+              link="https://jeremelt.notion.site/Aloshop-Checkout-Buyer-Side-23f5137bc09a8011b8e4c2ded6fe0200"
             />
             
             <ProjectCard 

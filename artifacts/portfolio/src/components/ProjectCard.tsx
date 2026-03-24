@@ -7,16 +7,22 @@ interface ProjectCardProps {
   tags: string;
   imageFallbackGradient: string;
   imageUrl?: string;
+  link?: string;
 }
 
-export function ProjectCard({ company, name, description, tags, imageFallbackGradient, imageUrl }: ProjectCardProps) {
+export function ProjectCard({ company, name, description, tags, imageFallbackGradient, imageUrl, link }: ProjectCardProps) {
+  const handleClick = () => {
+    if (link) window.open(link, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="group block w-full mb-32 last:mb-0 cursor-none"
+      onClick={handleClick}
+      className={`group block w-full mb-32 last:mb-0 cursor-none${link ? " cursor-pointer" : ""}`}
     >
       <div className="relative w-full aspect-[4/5] md:aspect-[16/9] overflow-hidden rounded-sm mb-8 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
         
