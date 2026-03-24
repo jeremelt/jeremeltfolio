@@ -2,6 +2,49 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback, useRef, useEffect } from "react";
 import profilePic from "@assets/Jeremy_Profile_Picture_1_1774334445184.jpeg";
 
+function KineticWord({ word }: { word: string }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <span
+      className="inline-flex cursor-none"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {word.split("").map((letter, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          animate={
+            isHovered
+              ? {
+                  y: [0, -28, 4, 0],
+                  scaleY: [1, 0.75, 1.1, 1],
+                  scaleX: [1, 1.1, 0.95, 1],
+                  rotate: [0, i % 2 === 0 ? -6 : 6, 0],
+                }
+              : { y: 0, scaleY: 1, scaleX: 1, rotate: 0 }
+          }
+          transition={
+            isHovered
+              ? {
+                  duration: 0.55,
+                  delay: i * 0.055,
+                  ease: [0.16, 1, 0.3, 1],
+                  repeat: Infinity,
+                  repeatDelay: 1.2,
+                }
+              : { duration: 0.3, ease: "easeOut" }
+          }
+          style={{ originY: 1 }}
+        >
+          {letter}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 const SIDEBAR_STYLE = {
   writingMode: "vertical-rl" as const,
   transform: "rotate(180deg)",
@@ -162,7 +205,7 @@ export function Hero() {
               animate={{ opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
-              is a Product
+              is a <KineticWord word="Product" />
             </motion.span>
             <br />
             {/* "Designer." */}
