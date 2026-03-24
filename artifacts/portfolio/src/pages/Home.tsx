@@ -40,7 +40,7 @@ export default function Home() {
               company="ALOSHOP - SHIPPER"
               name="Checkout Buyer Side"
               description="Redefining the digital ecosystem for a global brand. A comprehensive overhaul of their mobile experience focusing on seamless interaction and conversion."
-              tags="UI/UX · MOBILE · iOS"
+              tags="PRODUCT DESIGN · MOBILE WEB · 2022"
               imageFallbackGradient="linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-1.png`}
               link="https://jeremelt.notion.site/Aloshop-Checkout-Buyer-Side-23f5137bc09a8011b8e4c2ded6fe0200"
