@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import profilePic from "@assets/Jeremy_Profile_Picture_1_1774334445184.jpeg";
 
 const SIDEBAR_STYLE = {
@@ -17,6 +17,8 @@ export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const jeremyLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const designerLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -24,6 +26,24 @@ export function Hero() {
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
+  }, []);
+
+  const handleJeremyEnter = useCallback(() => {
+    if (jeremyLeaveTimer.current) clearTimeout(jeremyLeaveTimer.current);
+    setIsJeremyHovered(true);
+  }, []);
+
+  const handleJeremyLeave = useCallback(() => {
+    jeremyLeaveTimer.current = setTimeout(() => setIsJeremyHovered(false), 120);
+  }, []);
+
+  const handleDesignerEnter = useCallback(() => {
+    if (designerLeaveTimer.current) clearTimeout(designerLeaveTimer.current);
+    setIsDesignerHovered(true);
+  }, []);
+
+  const handleDesignerLeave = useCallback(() => {
+    designerLeaveTimer.current = setTimeout(() => setIsDesignerHovered(false), 120);
   }, []);
 
   const cardTransition = {
@@ -126,8 +146,8 @@ export function Hero() {
             <motion.span
               className="inline-block cursor-none"
               data-cursor="hover"
-              onMouseEnter={() => setIsJeremyHovered(true)}
-              onMouseLeave={() => setIsJeremyHovered(false)}
+              onMouseEnter={handleJeremyEnter}
+              onMouseLeave={handleJeremyLeave}
               animate={{ opacity: isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
@@ -147,8 +167,8 @@ export function Hero() {
             <motion.span
               className="inline-block cursor-none"
               data-cursor="hover"
-              onMouseEnter={() => setIsDesignerHovered(true)}
-              onMouseLeave={() => setIsDesignerHovered(false)}
+              onMouseEnter={handleDesignerEnter}
+              onMouseLeave={handleDesignerLeave}
               animate={{ opacity: isJeremyHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
