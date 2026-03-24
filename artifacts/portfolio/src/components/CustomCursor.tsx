@@ -45,9 +45,9 @@ export function CustomCursor() {
           opacity: 1,
         }}
         transition={{
-          type: "tween",
-          ease: "linear",
-          duration: 0,
+          x: { type: "tween", ease: "linear", duration: 0 },
+          y: { type: "tween", ease: "linear", duration: 0 },
+          scale: { type: "spring", stiffness: 300, damping: 22, mass: 0.5 },
         }}
       />
     </>
