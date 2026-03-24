@@ -13,7 +13,7 @@ export function Marquee({ text, reverse = false }: MarqueeProps) {
         {items.map((item, i) => (
           <span
             key={i}
-            className="text-foreground font-sans text-sm md:text-base font-medium tracking-[0.25em] mx-4 flex-shrink-0 flex items-center"
+            className="text-foreground font-sans text-sm md:text-base tracking-[0.25em] mx-4 flex-shrink-0 flex items-center font-normal"
           >
             {item}
           </span>
