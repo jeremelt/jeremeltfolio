@@ -132,10 +132,9 @@ export function About() {
               className="grid grid-cols-2 gap-3"
             >
               {items.map((item, i) => {
-                const badge = "level" in item ? item.level : item.type;
-                const badgeClass = "level" in item
-                  ? LEVEL_COLORS[item.level]
-                  : TYPE_COLORS[item.type];
+                const isSkill = "type" in item;
+                const badge = isSkill ? item.type : null;
+                const badgeClass = isSkill ? TYPE_COLORS[item.type] : "";
 
                 return (
                   <motion.div
@@ -148,9 +147,11 @@ export function About() {
                     <span className="font-sans text-sm font-medium text-foreground leading-tight">
                       {item.name}
                     </span>
-                    <span className={`self-start px-2 py-0.5 rounded-md border text-[11px] font-medium font-sans ${badgeClass}`}>
-                      {badge}
-                    </span>
+                    {badge && (
+                      <span className={`self-start px-2 py-0.5 rounded-md border text-[11px] font-medium font-sans ${badgeClass}`}>
+                        {badge}
+                      </span>
+                    )}
                   </motion.div>
                 );
               })}
