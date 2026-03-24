@@ -48,7 +48,7 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
           <div className="px-3 py-1 bg-background/90 backdrop-blur-sm border border-border rounded-full flex items-center">
             <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
             <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-foreground">
-              Case Study
+              REAL PROJECT
             </span>
           </div>
         </div>
