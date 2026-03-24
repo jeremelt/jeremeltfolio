@@ -154,9 +154,7 @@ export function Hero() {
               data-cursor="hover"
               animate={{ opacity: isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-            >
-              Jeremy
-            </motion.span>
+            >Jeremy Meldika</motion.span>
             <br />
             {/* "is a Product" */}
             <motion.span
