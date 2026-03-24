@@ -60,7 +60,7 @@ export default function Home() {
             
             <ProjectCard 
               company="GRABMART - GRAB"
-              name="[Project Name Three]"
+              name="Daily Goods Delivery Platform Redesign"
               description="Strategic user research and experience design for a complex B2B financial dashboard, translating dense data into actionable insights."
               tags="UX RESEARCH · STRATEGY"
               imageFallbackGradient="linear-gradient(135deg, #111111 0%, #222222 100%)"
