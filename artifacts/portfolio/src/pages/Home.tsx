@@ -22,7 +22,7 @@ export default function Home() {
       <main>
         <Hero />
         
-        <Marquee text="PRODUCT DESIGN · UX · [YOUR NAME] · CASE STUDY · VISUAL DESIGN · USER RESEARCH · INTERACTION · " />
+        <Marquee text="Product Designer · UI/UX Designer · Bachelor of Architecture · Photography & Art Enthusiast · " />
         
         {/* Featured Projects Section */}
         <section id="projects" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
