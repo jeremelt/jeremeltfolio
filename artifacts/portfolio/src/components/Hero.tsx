@@ -99,7 +99,7 @@ export function Hero() {
                 ))}
               </div>
               {/* Content */}
-              <div style={{ flex: 1, padding: "22px 20px 22px 16px" }}>
+              <div style={{ flex: 1, padding: "22px 20px 16px 16px" }}>
                 <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 17, color: "#0f1f1a", lineHeight: 1.55, fontWeight: 400 }}>
                   To break it down, he&apos;s basically a{" "}
                   <strong style={{ fontWeight: 700 }}>multidisciplinary designer,</strong>{" "}
