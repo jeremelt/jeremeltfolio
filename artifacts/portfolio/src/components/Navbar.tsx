@@ -13,30 +13,23 @@ export function Navbar() {
   }, [scrollY]);
 
   useEffect(() => {
-    const observers = new Map();
     const sections = ["projects", "about", "contact"];
 
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setActiveSection(id);
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(element);
-        observers.set(id, observer);
+    const onScroll = () => {
+      const scrollMid = window.scrollY + window.innerHeight * 0.4;
+      let current = "";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollMid) {
+          current = id;
+        }
       }
-    });
-
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
+      setActiveSection(current);
     };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTo = (id: string) => {
