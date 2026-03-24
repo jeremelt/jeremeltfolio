@@ -37,7 +37,7 @@ export default function Home() {
           
           <div className="flex flex-col w-full">
             <ProjectCard 
-              company="[CLIENT ONE]"
+              company="ALOSHOP - SHIPPER"
               name="[Project Name One]"
               description="Redefining the digital ecosystem for a global brand. A comprehensive overhaul of their mobile experience focusing on seamless interaction and conversion."
               tags="UI/UX · MOBILE · iOS"
