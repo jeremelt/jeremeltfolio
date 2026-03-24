@@ -148,7 +148,7 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="space-y-8 font-sans text-xl md:text-2xl text-foreground leading-relaxed font-light"
+            className="space-y-8 font-sans md:text-2xl text-foreground font-light text-[20px]"
           >
             <p>I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms.</p>
             <p>With a background in architecture, I bring a structured, systems-thinking approach to solving complex user problems.</p>
