@@ -42,20 +42,82 @@ export function Hero() {
             }}
             style={{ top: 0, left: 0 }}
           >
-            {/* Polaroid frame */}
-            <div className="bg-white p-3 pb-10 shadow-2xl text-center" style={{ width: 220 }}>
-              <img
-                src={profilePic}
-                alt="Jeremy"
-                className="w-full object-cover"
-                style={{ height: 200, objectPosition: "top" }}
-              />
-              <p
-                className="mt-3 text-black text-sm leading-snug"
-                style={{ fontFamily: "Georgia, serif", fontStyle: "italic" }}
+            {/* Editorial card */}
+            <div
+              className="relative flex shadow-2xl"
+              style={{ width: 260, borderRadius: 20, overflow: "hidden", background: "#D5CFC0" }}
+            >
+              {/* Left sidebar with vertical "EDITOR'S NOTE" text */}
+              <div
+                className="flex-shrink-0 flex flex-col justify-around items-center py-4"
+                style={{ width: 22, background: "#C8C2B2" }}
               >
-                oh, there he is, spotted!
-              </p>
+                {[0, 1, 2, 3].map((i) => (
+                  <span
+                    key={i}
+                    style={{
+                      writingMode: "vertical-rl",
+                      transform: "rotate(180deg)",
+                      fontSize: 7,
+                      letterSpacing: "0.18em",
+                      fontFamily: "DM Sans, sans-serif",
+                      color: "#7a7468",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      userSelect: "none",
+                    }}
+                  >
+                    EDITOR&apos;S NOTE
+                  </span>
+                ))}
+              </div>
+
+              {/* Main card content */}
+              <div className="flex-1 flex flex-col" style={{ padding: "14px 14px 18px 12px" }}>
+                {/* Photo */}
+                <img
+                  src={profilePic}
+                  alt="Jeremy"
+                  className="w-full object-cover"
+                  style={{
+                    height: 260,
+                    objectPosition: "top center",
+                    borderRadius: 10,
+                    filter: "grayscale(20%)",
+                  }}
+                />
+
+                {/* Caption row */}
+                <div className="flex items-start mt-4 gap-2">
+                  {/* Curved arrow SVG */}
+                  <svg
+                    width="22" height="22" viewBox="0 0 22 22" fill="none"
+                    style={{ flexShrink: 0, marginTop: 1 }}
+                  >
+                    <path
+                      d="M4 4 C4 12, 12 18, 18 16"
+                      stroke="#5a5448" strokeWidth="1.5" fill="none"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M15 13 L18 16 L14 17"
+                      stroke="#5a5448" strokeWidth="1.5" fill="none"
+                      strokeLinecap="round" strokeLinejoin="round"
+                    />
+                  </svg>
+                  <p
+                    style={{
+                      fontFamily: "DM Sans, sans-serif",
+                      fontSize: 13,
+                      color: "#3a3530",
+                      lineHeight: 1.4,
+                      fontWeight: 400,
+                    }}
+                  >
+                    oh, there he is, spotted!
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
