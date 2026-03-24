@@ -39,7 +39,7 @@ export default function Home() {
             <ProjectCard 
               company="ALOSHOP - SHIPPER"
               name="Checkout Buyer Side"
-              description="Redefining the digital ecosystem for a global brand. A comprehensive overhaul of their mobile experience focusing on seamless interaction and conversion."
+              description="Designed a new buyer-side checkout flow for Aloshop to streamline purchasing, reduce friction, and improve overall conversion."
               tags="PRODUCT DESIGN · MOBILE WEB · 2022"
               imageFallbackGradient="linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-1.png`}
