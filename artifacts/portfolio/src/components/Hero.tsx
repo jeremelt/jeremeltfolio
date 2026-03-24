@@ -159,7 +159,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="max-w-2xl"
+          className="w-full"
         >
           <p className="font-sans md:text-2xl text-foreground mb-8 font-light text-[20px]">Currently, I’m a Product Designer at RED Comm Indonesia, focused on improving software experiences, such as ERP features, through intuitive design, and AI-driven solutions. I work closely with cross-functional teams to create user flows and high-fidelity prototypes that enhance usability and product impact. </p>
 
