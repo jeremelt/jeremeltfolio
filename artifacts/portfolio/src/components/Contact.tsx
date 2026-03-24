@@ -18,7 +18,7 @@ export function Contact() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-5xl md:text-7xl lg:text-[100px] leading-[0.9] tracking-tight mb-12 max-w-4xl"
         >
-          Say hi or stalk me <span className="text-muted-foreground italic text-stroke">online.</span>
+          Say hi or stalk me <span className="italic text-[#c7ee4e]">online.</span>
         </motion.h2>
 
         <motion.a
@@ -39,7 +39,6 @@ export function Contact() {
           </div>
         </motion.a>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 mb-32">
         <div className="flex flex-col space-y-6">
           {SOCIALS.map((social, i) => (
@@ -60,9 +59,7 @@ export function Contact() {
           ))}
         </div>
       </div>
-
       <div className="w-full h-px bg-border/50 mb-8" />
-      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
         <p>Designed & built by [YOUR NAME]</p>
         <p className="mt-2 md:mt-0">© 2025 ALL RIGHTS RESERVED</p>
