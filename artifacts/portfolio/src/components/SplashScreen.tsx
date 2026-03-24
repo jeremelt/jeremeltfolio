@@ -54,8 +54,8 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       timersRef.current.push(t);
     }, 500);
 
-    add(() => setShowCursor(false), 4200);
-    add(complete, 4200);
+    add(() => setShowCursor(false), 6500);
+    add(complete, 6500);
 
     return () => timersRef.current.forEach(clearTimeout);
   }, [complete]);
