@@ -191,9 +191,6 @@ export function Hero() {
         transition={{ duration: 1, delay: 0.8 }}
         className="absolute bottom-8 left-6 md:left-12 flex justify-between w-[calc(100%-3rem)] md:w-[calc(100%-6rem)]"
       >
-        <span className="font-sans text-xs tracking-widest uppercase text-muted-foreground">
-          © 2025 PORTFOLIO
-        </span>
         <span className="font-sans text-xs tracking-widest uppercase text-muted-foreground hidden md:block">
           SCROLL TO EXPLORE
         </span>
