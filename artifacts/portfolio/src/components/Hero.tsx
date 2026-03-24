@@ -43,7 +43,7 @@ export function Hero() {
             style={{ top: 0, left: 0 }}
           >
             {/* Polaroid frame */}
-            <div className="bg-white p-3 pb-10 shadow-2xl" style={{ width: 220 }}>
+            <div className="bg-white p-3 pb-10 shadow-2xl" style={{ width: 220, borderRadius: 16, overflow: "hidden" }}>
               <img
                 src={profilePic}
                 alt="Jeremy"
