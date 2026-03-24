@@ -44,7 +44,7 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
         <div className="absolute inset-0 bg-black/20 z-20 transition-opacity duration-500 group-hover:bg-black/40" />
 
         {/* Badge inside image area */}
-        <div className="absolute top-6 left-6 z-30">
+        <div className="absolute top-6 right-6 z-30">
           <div className="px-3 py-1 bg-background/90 backdrop-blur-sm border border-border rounded-full flex items-center">
             <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
             <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-foreground">
