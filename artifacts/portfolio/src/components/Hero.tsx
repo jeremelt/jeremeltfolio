@@ -192,7 +192,7 @@ export function Hero() {
             onClick={scrollToProjects}
             className="group flex items-center space-x-4 font-sans font-medium text-lg text-accent hover:text-accent/80 transition-colors"
           >
-            <span>See My Work</span>
+            <span>See His Work</span>
             <motion.span
               className="inline-block"
               animate={{ y: [0, 5, 0] }}
