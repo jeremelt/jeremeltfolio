@@ -71,13 +71,7 @@ export function About() {
             className="space-y-8 font-sans text-xl md:text-2xl text-foreground leading-relaxed font-light"
           >
             <p>
-              I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms.
-            </p>
-            <p className="text-muted-foreground">
-              My journey started in architecture before shifting to digital product. That structural foundation informs my approach: build a solid skeleton first, then obsess over the finishes. Previously, I've shaped experiences at <span className="text-foreground">[Company A]</span>, <span className="text-foreground">[Company B]</span>, and <span className="text-foreground">[Company C]</span>.
-            </p>
-            <p>
-              When I'm not pushing pixels or arguing about border radii, you'll find me collecting obscure typography books, attempting latte art, or over-analyzing the UX of physical objects in the real world.
+              I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms. With a background in architecture, I bring a structured, systems-thinking approach to solving complex user problems. I've worked closely with cross-functional teams to design end-to-end experiences—from research and user flows to high-fidelity prototypes. I'm particularly interested in crafting seamless, impactful solutions that work behind the scenes but make a meaningful difference for users.
             </p>
           </motion.div>
 
