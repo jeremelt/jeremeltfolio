@@ -50,7 +50,7 @@ export default function Home() {
               company="PEDULI LINDUNGI"
               name="Designing crowd insights for Indonesia's COVID-19 tracing app"
               description="Architecting a scalable design system that unified 14 different sub-brands under one cohesive visual language while reducing developer handoff time by 40%."
-              tags="WEB · DESIGN SYSTEM"
+              tags="PRODUCT DESIGN · MOBILE APP · 2021"
               imageFallbackGradient="linear-gradient(135deg, #0d0d0d 0%, #1f1f1f 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-2.png`}
               badge="CASE STUDY"
