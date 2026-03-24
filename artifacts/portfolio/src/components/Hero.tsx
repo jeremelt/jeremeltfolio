@@ -50,7 +50,7 @@ export function Hero() {
             transition={cardTransition}
             style={{ top: 0, left: 0 }}
           >
-            <div className="relative flex shadow-2xl" style={{ width: 260, borderRadius: 20, overflow: "hidden", background: "#D5CFC0" }}>
+            <div className="relative flex shadow-2xl" style={{ width: 260, borderRadius: 8, overflow: "hidden", background: "#D5CFC0" }}>
               {/* Sidebar */}
               <div className="flex-shrink-0 flex flex-col justify-around items-center py-4" style={{ width: 22, background: "#C8C2B2" }}>
                 {[0, 1, 2, 3].map((i) => (
@@ -90,7 +90,7 @@ export function Hero() {
             transition={cardTransition}
             style={{ top: 0, left: 0 }}
           >
-            <div className="relative flex shadow-2xl" style={{ width: 310, borderRadius: 20, overflow: "hidden", background: "#8BAF9F" }}>
+            <div className="relative flex shadow-2xl" style={{ width: 310, borderRadius: 8, overflow: "hidden", background: "#8BAF9F" }}>
               {/* Sidebar */}
               <div className="flex-shrink-0 flex flex-col justify-around items-center py-4" style={{ width: 22, background: "#7A9E8E" }}>
                 {[0, 1, 2].map((i) => (
