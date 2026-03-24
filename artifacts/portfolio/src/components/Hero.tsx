@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import profilePic from "@assets/Jeremy_Profile_Picture_1_1774334445184.jpeg";
 
 const SIDEBAR_STYLE = {
@@ -19,6 +19,17 @@ export function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const jeremyRef = useRef<HTMLSpanElement>(null);
   const designerRef = useRef<HTMLSpanElement>(null);
+  const mousePosRef = useRef({ x: 0, y: 0 });
+
+  const checkHits = useCallback((x: number, y: number) => {
+    const hit = (ref: React.RefObject<HTMLSpanElement | null>) => {
+      if (!ref.current) return false;
+      const r = ref.current.getBoundingClientRect();
+      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    };
+    setIsJeremyHovered(hit(jeremyRef));
+    setIsDesignerHovered(hit(designerRef));
+  }, []);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -26,17 +37,19 @@ export function Hero() {
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const { clientX: x, clientY: y } = e;
+    mousePosRef.current = { x, y };
     setMousePos({ x, y });
+    checkHits(x, y);
+  }, [checkHits]);
 
-    const hit = (ref: React.RefObject<HTMLSpanElement | null>) => {
-      if (!ref.current) return false;
-      const r = ref.current.getBoundingClientRect();
-      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+  useEffect(() => {
+    const onScroll = () => {
+      const { x, y } = mousePosRef.current;
+      checkHits(x, y);
     };
-
-    setIsJeremyHovered(hit(jeremyRef));
-    setIsDesignerHovered(hit(designerRef));
-  }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [checkHits]);
 
   const cardTransition = {
     opacity: { duration: 0.2 },
