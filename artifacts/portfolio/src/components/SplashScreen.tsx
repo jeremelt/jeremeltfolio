@@ -6,10 +6,75 @@ interface SplashScreenProps {
   onComplete: () => void;
 }
 
+function TvNoise({ opacity }: { opacity: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const SCALE = 3;
+
+    const resize = () => {
+      canvas.width = Math.ceil(window.innerWidth / SCALE);
+      canvas.height = Math.ceil(window.innerHeight / SCALE);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    let frame = 0;
+    const draw = () => {
+      frame++;
+      if (frame % 2 === 0) {
+        const w = canvas.width;
+        const h = canvas.height;
+        const imageData = ctx.createImageData(w, h);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const v = Math.random() * 255 | 0;
+          data[i] = v;
+          data[i + 1] = v;
+          data[i + 2] = v;
+          data[i + 3] = 255;
+        }
+        ctx.putImageData(imageData, 0, 0);
+      }
+      rafRef.current = requestAnimationFrame(draw);
+    };
+
+    rafRef.current = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "absolute",
+        inset: 0,
+        opacity,
+        mixBlendMode: "overlay",
+        pointerEvents: "none",
+        imageRendering: "pixelated",
+        transition: "opacity 0.8s ease",
+      }}
+    />
+  );
+}
+
 export function SplashScreen({ onComplete }: SplashScreenProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [showCursor, setShowCursor] = useState(false);
-  const [grainOpacity, setGrainOpacity] = useState(0);
+  const [noiseOpacity, setNoiseOpacity] = useState(0);
   const [textOpacity, setTextOpacity] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
   const [removed, setRemoved] = useState(false);
@@ -36,7 +101,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       timersRef.current.push(t);
     };
 
-    add(() => setGrainOpacity(0.1), 50);
+    add(() => setNoiseOpacity(0.18), 50);
     add(() => {
       setTextOpacity(1);
       setShowCursor(true);
@@ -77,22 +142,12 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         pointerEvents: fadeOut ? "none" : "auto",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: grainOpacity,
-          transition: "opacity 0.5s ease",
-          mixBlendMode: "overlay",
-          pointerEvents: "none",
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
-        }}
-      />
+      <TvNoise opacity={noiseOpacity} />
 
       <p
         style={{
+          position: "relative",
+          zIndex: 1,
           fontFamily: "'PP Kyoto', Georgia, serif",
           fontStyle: "italic",
           fontWeight: 300,
@@ -117,6 +172,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           position: "absolute",
           top: "2rem",
           right: "2rem",
+          zIndex: 1,
           background: "none",
           border: "none",
           color: "#555555",
