@@ -15,7 +15,7 @@ export function Hero() {
           className="mb-8"
         >
           <h1 className="font-display text-[12vw] leading-[0.85] tracking-tight md:text-[8vw] lg:text-[140px] text-foreground">
-            [YOUR NAME]
+            Jeremy
             <br />
             <span className="italic text-[#c7ee4f]">is a Product</span>
             <br />
