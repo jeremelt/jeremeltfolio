@@ -79,7 +79,6 @@ export function Hero() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Designer — text card */}
       <AnimatePresence>
         {isDesignerHovered && (
@@ -115,7 +114,6 @@ export function Hero() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <div className="flex-1 flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -163,9 +161,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="max-w-2xl"
         >
-          <p className="font-sans text-xl md:text-2xl text-foreground leading-relaxed mb-8">
-            [Your highly opinionated, sharp, 1-sentence tagline about crafting unforgettable digital experiences and challenging the status quo.]
-          </p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-light text-[20px]">Currently, I’m a Product Designer at RED Comm Indonesia, focused on improving software experiences, such as ERP features, through intuitive design, and AI-driven solutions. I work closely with cross-functional teams to create user flows and high-fidelity prototypes that enhance usability and product impact. </p>
 
           <div className="flex items-center space-x-3 mb-12">
             <div className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
@@ -189,7 +185,6 @@ export function Hero() {
           </button>
         </motion.div>
       </div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
