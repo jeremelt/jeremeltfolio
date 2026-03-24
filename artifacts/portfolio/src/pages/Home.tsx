@@ -53,6 +53,7 @@ export default function Home() {
               tags="WEB · DESIGN SYSTEM"
               imageFallbackGradient="linear-gradient(135deg, #0d0d0d 0%, #1f1f1f 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-2.png`}
+              badge="CASE STUDY"
             />
             
             <ProjectCard 
