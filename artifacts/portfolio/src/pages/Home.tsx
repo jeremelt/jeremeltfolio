@@ -47,7 +47,7 @@ export default function Home() {
             />
             
             <ProjectCard 
-              company="[CLIENT TWO]"
+              company="PEDULI LINDUNGI"
               name="[Project Name Two]"
               description="Architecting a scalable design system that unified 14 different sub-brands under one cohesive visual language while reducing developer handoff time by 40%."
               tags="WEB · DESIGN SYSTEM"
