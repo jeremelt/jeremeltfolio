@@ -25,10 +25,9 @@ export function ProjectIndex() {
         {/* Table Header */}
         <div className="grid grid-cols-12 gap-4 py-4 border-b border-border/50 text-xs font-sans tracking-widest uppercase text-muted-foreground">
           <div className="col-span-2 md:col-span-1">No.</div>
-          <div className="col-span-8 md:col-span-5">Project Name</div>
+          <div className="col-span-10 md:col-span-6">Project Name</div>
           <div className="hidden md:block md:col-span-3">Platform</div>
           <div className="hidden md:block md:col-span-2">Category</div>
-          <div className="col-span-2 md:col-span-1 text-right">Status</div>
         </div>
 
         {/* Table Rows */}
@@ -47,7 +46,7 @@ export function ProjectIndex() {
             <div className="col-span-2 md:col-span-1 font-sans text-sm text-muted-foreground">
               {project.id}
             </div>
-            <div className="col-span-8 md:col-span-5 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">
+            <div className="col-span-10 md:col-span-6 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">
               {project.name}
             </div>
             <div className="hidden md:block md:col-span-3 font-sans text-sm text-muted-foreground">
@@ -55,13 +54,6 @@ export function ProjectIndex() {
             </div>
             <div className="hidden md:block md:col-span-2 font-sans text-sm text-muted-foreground">
               {project.category}
-            </div>
-            <div className="col-span-2 md:col-span-1 text-right flex justify-end">
-              {project.locked ? (
-                <span className="text-xl opacity-50" title="Protected under NDA">🔒</span>
-              ) : (
-                <span className="text-xl transform transition-transform duration-300 group-hover:-rotate-45 group-hover:text-accent">→</span>
-              )}
             </div>
           </motion.a>
         ))}
