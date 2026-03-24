@@ -17,33 +17,25 @@ export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const jeremyLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const designerLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const jeremyRef = useRef<HTMLSpanElement>(null);
+  const designerRef = useRef<HTMLSpanElement>(null);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  }, []);
+    const { clientX: x, clientY: y } = e;
+    setMousePos({ x, y });
 
-  const handleJeremyEnter = useCallback(() => {
-    if (jeremyLeaveTimer.current) clearTimeout(jeremyLeaveTimer.current);
-    setIsJeremyHovered(true);
-  }, []);
+    const hit = (ref: React.RefObject<HTMLSpanElement | null>) => {
+      if (!ref.current) return false;
+      const r = ref.current.getBoundingClientRect();
+      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    };
 
-  const handleJeremyLeave = useCallback(() => {
-    jeremyLeaveTimer.current = setTimeout(() => setIsJeremyHovered(false), 120);
-  }, []);
-
-  const handleDesignerEnter = useCallback(() => {
-    if (designerLeaveTimer.current) clearTimeout(designerLeaveTimer.current);
-    setIsDesignerHovered(true);
-  }, []);
-
-  const handleDesignerLeave = useCallback(() => {
-    designerLeaveTimer.current = setTimeout(() => setIsDesignerHovered(false), 120);
+    setIsJeremyHovered(hit(jeremyRef));
+    setIsDesignerHovered(hit(designerRef));
   }, []);
 
   const cardTransition = {
@@ -144,10 +136,9 @@ export function Hero() {
           <h1 className="font-display text-[12vw] leading-[0.85] tracking-tight md:text-[8vw] lg:text-[140px] text-foreground mb-[36px]">
             {/* "Jeremy" */}
             <motion.span
+              ref={jeremyRef}
               className="inline-block cursor-none"
               data-cursor="hover"
-              onMouseEnter={handleJeremyEnter}
-              onMouseLeave={handleJeremyLeave}
               animate={{ opacity: isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
@@ -161,10 +152,9 @@ export function Hero() {
             <br />
             {/* "Designer." */}
             <motion.span
+              ref={designerRef}
               className="inline-block cursor-none"
               data-cursor="hover"
-              onMouseEnter={handleDesignerEnter}
-              onMouseLeave={handleDesignerLeave}
               animate={{ opacity: isJeremyHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
