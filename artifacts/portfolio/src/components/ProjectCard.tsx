@@ -54,20 +54,23 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <div className="mb-4">
+        <div className="font-sans text-sm font-medium tracking-widest text-accent uppercase mb-4">
+          {company}
+        </div>
+        <h3 className="font-display text-4xl md:text-5xl lg:text-6xl w-full group-hover:text-accent transition-colors duration-300">
+          {name}
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end mt-6">
         <div className="md:col-span-8">
-          <div className="font-sans text-sm font-medium tracking-widest text-accent uppercase mb-4">
-            {company}
-          </div>
-          <h3 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4 group-hover:text-accent transition-colors duration-300">
-            {name}
-          </h3>
           <p className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
             {description}
           </p>
         </div>
         
-        <div className="md:col-span-4 flex flex-col md:items-end justify-between h-full pt-2">
+        <div className="md:col-span-4 flex flex-col md:items-end justify-between h-full">
           <div className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase mb-8 md:text-right">
             {tags}
           </div>

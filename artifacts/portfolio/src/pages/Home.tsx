@@ -38,7 +38,7 @@ export default function Home() {
           <div className="flex flex-col w-full">
             <ProjectCard 
               company="ALOSHOP - SHIPPER"
-              name="[Project Name One]"
+              name="Checkout Buyer Side"
               description="Redefining the digital ecosystem for a global brand. A comprehensive overhaul of their mobile experience focusing on seamless interaction and conversion."
               tags="UI/UX · MOBILE · iOS"
               imageFallbackGradient="linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
