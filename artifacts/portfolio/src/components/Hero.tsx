@@ -186,7 +186,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="w-full"
         >
-          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">Currently, I’m a Product Designer at RED Comm Indonesia, focused on improving software experiences, such as ERP features, through intuitive design, and AI-driven solutions. I work closely with cross-functional teams to create user flows and high-fidelity prototypes that enhance usability and product impact. </p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing moments, appreciating architecture, and spending playful time with his dog.</p>
 
           <button
             onClick={scrollToProjects}
