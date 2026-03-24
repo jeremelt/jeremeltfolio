@@ -155,13 +155,9 @@ export function Hero() {
             </motion.span>
             <br />
             {/* "is a Product" */}
-            <motion.span
-              className="italic text-[#c7ee4f]"
-              animate={{ opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-            >
+            <span className="italic text-[#c7ee4f]">
               is a Product
-            </motion.span>
+            </span>
             <br />
             {/* "Designer." */}
             <motion.span
