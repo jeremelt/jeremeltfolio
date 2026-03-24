@@ -59,8 +59,8 @@ export function Navbar() {
         <a 
           href="#" 
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="font-sans font-medium text-sm tracking-[0.2em] uppercase hover:text-accent transition-colors"
-        >MeltFolio</a>
+          className="font-sans text-sm tracking-[0.2em] uppercase hover:text-accent transition-colors font-bold"
+        >MeltFolio.</a>
 
         <div className="hidden md:flex items-center space-x-8">
           {[
