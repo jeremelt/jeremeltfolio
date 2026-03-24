@@ -70,12 +70,10 @@ export function About() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="space-y-8 font-sans text-xl md:text-2xl text-foreground leading-relaxed font-light"
           >
-            <p>I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms. 
-
-            With a background in architecture, I bring a structured, systems-thinking approach to solving complex user problems. 
-
-            I've worked closely with cross-functional teams to design end-to-end experiences, from research and user flows to high-fidelity prototypes. 
-            I'm particularly interested in crafting seamless, impactful solutions that work behind the scenes but make a meaningful difference for users.</p>
+            <p>I'm a Product Designer with experience in building and improving digital products across ERP systems, logistics, and e-commerce platforms.</p>
+            <p>With a background in architecture, I bring a structured, systems-thinking approach to solving complex user problems.</p>
+            <p>I've worked closely with cross-functional teams to design end-to-end experiences—from research and user flows to high-fidelity prototypes.</p>
+            <p>I'm particularly interested in crafting seamless, impactful solutions that work behind the scenes but make a meaningful difference for users.</p>
           </motion.div>
 
           <motion.div
