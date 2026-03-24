@@ -17,7 +17,7 @@ export function Hero() {
           <h1 className="font-display text-[12vw] leading-[0.85] tracking-tight md:text-[8vw] lg:text-[140px] text-foreground">
             [YOUR NAME]
             <br />
-            <span className="text-muted-foreground italic text-stroke">is a Product</span>
+            <span className="italic text-[#c7ee4f]">is a Product</span>
             <br />
             Designer.
           </h1>
@@ -55,7 +55,6 @@ export function Hero() {
           </button>
         </motion.div>
       </div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
