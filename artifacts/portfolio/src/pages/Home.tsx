@@ -59,7 +59,7 @@ export default function Home() {
             />
             
             <ProjectCard 
-              company="[CLIENT THREE]"
+              company="GRABMART - GRAB"
               name="[Project Name Three]"
               description="Strategic user research and experience design for a complex B2B financial dashboard, translating dense data into actionable insights."
               tags="UX RESEARCH · STRATEGY"
