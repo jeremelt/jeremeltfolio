@@ -66,6 +66,8 @@ export default function Home() {
               imageFallbackGradient="linear-gradient(135deg, #111111 0%, #222222 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-3.png`}
               badge="CASE STUDY"
+              ctaLabel="VIEW CASE STUDY"
+              link="https://jeremelt.notion.site/Case-study-GrabMart-24c5137bc09a8055b645c737499aa6e8"
             />
           </div>
         </section>
