@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 
 const SOCIALS = [
-  { name: "LinkedIn", url: "#" },
-  { name: "Behance", url: "#" },
-  { name: "Instagram", url: "#" },
-  { name: "Dribbble", url: "#" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/jeremymeldika/" },
+  { name: "Behance", url: "https://www.behance.net/jeremelt" },
+  { name: "Instagram", url: "https://www.instagram.com/jxrxmxlt" },
+  { name: "Dribbble", url: "https://dribbble.com/jeremelt" },
+  { name: "Medium", url: "https://medium.com/@jeremelt" },
 ];
 
 export function Contact() {
@@ -43,6 +44,8 @@ export function Contact() {
             <motion.a
               key={social.name}
               href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
