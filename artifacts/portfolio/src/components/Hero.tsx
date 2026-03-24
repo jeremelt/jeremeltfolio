@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback } from "react";
-import profilePic from "@assets/Profile_Pict_1774333879125.png";
+import profilePic from "@assets/Jeremy_Profile_Picture_1_1774334445184.jpeg";
 
 export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
