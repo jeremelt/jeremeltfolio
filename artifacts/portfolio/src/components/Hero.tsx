@@ -185,16 +185,6 @@ export function Hero() {
           </button>
         </motion.div>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="absolute bottom-8 left-6 md:left-12 flex justify-between w-[calc(100%-3rem)] md:w-[calc(100%-6rem)]"
-      >
-        <span className="font-sans text-xs tracking-widest uppercase text-muted-foreground hidden md:block">
-          SCROLL TO EXPLORE
-        </span>
-      </motion.div>
     </section>
   );
 }
