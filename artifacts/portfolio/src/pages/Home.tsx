@@ -62,7 +62,7 @@ export default function Home() {
               company="GRABMART - GRAB"
               name="Daily Goods Delivery Platform Redesign"
               description="Strategic user research and experience design for a complex B2B financial dashboard, translating dense data into actionable insights."
-              tags="UX RESEARCH · STRATEGY"
+              tags="UI/UX DESIGN · MOBILE APP · 2021"
               imageFallbackGradient="linear-gradient(135deg, #111111 0%, #222222 100%)"
               imageUrl={`${import.meta.env.BASE_URL}images/project-3.png`}
               badge="CASE STUDY"
