@@ -82,7 +82,7 @@ export function ProjectCard({ company, name, description, tags, imageFallbackGra
         
         <div className="md:col-span-4 flex flex-col md:items-end justify-end h-full">
           <button className="flex items-center space-x-2 font-sans text-sm tracking-widest uppercase text-foreground group-hover:text-accent transition-colors border-b border-transparent group-hover:border-accent pb-1 w-fit">
-            <span>View Case Study</span>
+            <span>VIEW PROJECT</span>
             <span className="transform transition-transform duration-300 group-hover:translate-x-2">→</span>
           </button>
         </div>
