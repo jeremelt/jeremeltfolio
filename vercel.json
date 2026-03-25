@@ -1,0 +1,11 @@
+{
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist/public",
+  "env": {
+    "PORT": "3000",
+    "BASE_PATH": "/"
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
