@@ -4,8 +4,12 @@ import profilePic from "@assets/Jeremy_Profile_Picture_1_1774334445184.jpeg";
 import photo1 from "@assets/DSC_0223_-_Copy_1774410658464.JPG";
 import photo2 from "@assets/DSC_0272_1774410658466.JPG";
 import photo3 from "@assets/DSC_0316_1774410658467.JPG";
+import arch1 from "@assets/28157804_1962864647364689_7435526247024689152_n_1774411299142.jpg";
+import arch2 from "@assets/75362577_165659311468511_3581380266778449708_n_1774411299144.jpg";
+import arch3 from "@assets/75538185_1051752435179252_1790554123296458632_n_1774411299144.jpg";
 
 const PHOTOS = [photo1, photo2, photo3];
+const ARCH_PHOTOS = [arch1, arch2, arch3];
 
 const SIDEBAR_STYLE = {
   writingMode: "vertical-rl" as const,
@@ -22,11 +26,14 @@ export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
   const [isMomentsHovered, setIsMomentsHovered] = useState(false);
+  const [isArchHovered, setIsArchHovered] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [archIndex, setArchIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const jeremyRef = useRef<HTMLSpanElement>(null);
   const designerRef = useRef<HTMLSpanElement>(null);
   const momentsRef = useRef<HTMLSpanElement>(null);
+  const archRef = useRef<HTMLSpanElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
   const checkHits = useCallback((x: number, y: number) => {
@@ -38,6 +45,7 @@ export function Hero() {
     setIsJeremyHovered(hit(jeremyRef));
     setIsDesignerHovered(hit(designerRef));
     setIsMomentsHovered(hit(momentsRef));
+    setIsArchHovered(hit(archRef));
   }, []);
 
   useEffect(() => {
@@ -47,6 +55,14 @@ export function Hero() {
     }, 1500);
     return () => clearInterval(id);
   }, [isMomentsHovered]);
+
+  useEffect(() => {
+    if (!isArchHovered) return;
+    const id = setInterval(() => {
+      setArchIndex(i => (i + 1) % ARCH_PHOTOS.length);
+    }, 1500);
+    return () => clearInterval(id);
+  }, [isArchHovered]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -214,6 +230,60 @@ export function Hero() {
         )}
       </AnimatePresence>
 
+      {/* Architecture — cycling 3D render card */}
+      <AnimatePresence>
+        {isArchHovered && (
+          <motion.div
+            className="fixed pointer-events-none z-[200]"
+            initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
+            animate={{ opacity: 1, scale: 1, rotate: -2, x: mousePos.x - 310, y: mousePos.y - 280 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={cardTransition}
+            style={{ top: 0, left: 0 }}
+          >
+            <div className="relative flex shadow-2xl" style={{ width: 280, borderRadius: 8, overflow: "hidden", background: "#F2C5B0" }}>
+              {/* Sidebar */}
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#E8B09A", alignSelf: "stretch" }}>
+                <span style={{ ...SIDEBAR_STYLE, color: "#9A5A45" }}>
+                  EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE
+                </span>
+              </div>
+              {/* Content */}
+              <div className="flex-1 flex flex-col" style={{ padding: "14px 14px 16px 12px" }}>
+                <div style={{ position: "relative", height: 220, borderRadius: 8, overflow: "hidden", background: "#c9957e" }}>
+                  <AnimatePresence mode="sync">
+                    <motion.img
+                      key={archIndex}
+                      src={ARCH_PHOTOS[archIndex]}
+                      alt={`Arch ${archIndex + 1}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </AnimatePresence>
+                  <div style={{ position: "absolute", bottom: 8, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 5 }}>
+                    {ARCH_PHOTOS.map((_, i) => (
+                      <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: i === archIndex ? "#C8F04E" : "rgba(255,255,255,0.45)", transition: "background 0.3s" }} />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-start mt-3 gap-2">
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
+                    <path d="M4 4 C4 12, 12 18, 18 16" stroke="#9A5A45" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    <path d="M15 13 L18 16 L14 17" stroke="#9A5A45" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13, color: "#5c2e1e", lineHeight: 1.4, fontWeight: 400 }}>
+                    sometimes he just misses doing 3D rendering, hehe...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex-1 flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -259,7 +329,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="w-full"
         >
-          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating architecture 🏛️, and spending playful time with his dog 🐶.</p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating <span ref={archRef} className="cursor-none" data-cursor="hover">architecture 🏛️</span>, and spending playful time with his dog 🐶.</p>
 
           <button
             onClick={scrollToProjects}
