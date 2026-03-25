@@ -26,34 +26,62 @@ export function ProjectIndex() {
         </div>
 
         {/* Table Rows */}
-        {PROJECTS.map((project, index) => (
-          <motion.a
-            href={project.locked ? undefined : (project.link ?? "#")}
-            target={project.link ? "_blank" : undefined}
-            rel={project.link ? "noopener noreferrer" : undefined}
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`grid grid-cols-12 gap-4 py-6 border-b border-border/50 items-center group transition-colors duration-300 ${
-              project.locked ? "cursor-not-allowed opacity-60" : "hover:bg-foreground/5 cursor-none"
-            }`}
-          >
-            <div className="col-span-2 md:col-span-1 font-sans text-sm text-muted-foreground">
-              {project.id}
-            </div>
-            <div className="col-span-10 md:col-span-6 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">
-              {project.name}
-            </div>
-            <div className="hidden md:block md:col-span-3 font-sans text-sm text-muted-foreground">
-              {project.platform}
-            </div>
-            <div className="hidden md:block md:col-span-2 font-sans text-sm text-muted-foreground">
-              {project.category}
-            </div>
-          </motion.a>
-        ))}
+        {PROJECTS.map((project, index) => {
+          const [categoryMain, categorySub] = project.category.includes(" - ")
+            ? project.category.split(" - ")
+            : [project.category, null];
+
+          const sharedMotionProps = {
+            key: project.id,
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            transition: { duration: 0.5, delay: index * 0.1 },
+          };
+
+          const innerContent = (
+            <>
+              <div className="col-span-2 md:col-span-1 font-sans text-sm text-muted-foreground">
+                {project.id}
+              </div>
+              <div className="col-span-10 md:col-span-6 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">
+                {project.name}
+              </div>
+              <div className="hidden md:block md:col-span-3 font-sans text-sm text-muted-foreground">
+                {project.platform}
+              </div>
+              <div className="hidden md:block md:col-span-2 font-sans text-sm text-muted-foreground leading-snug">
+                <span>{categoryMain}</span>
+                {categorySub && (
+                  <><br /><span className="text-xs opacity-60">{categorySub}</span></>
+                )}
+              </div>
+            </>
+          );
+
+          if (project.locked) {
+            return (
+              <motion.div
+                {...sharedMotionProps}
+                className="grid grid-cols-12 gap-4 py-6 border-b border-border/50 items-center group transition-colors duration-300 cursor-not-allowed opacity-60"
+              >
+                {innerContent}
+              </motion.div>
+            );
+          }
+
+          return (
+            <motion.a
+              {...sharedMotionProps}
+              href={project.link ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid grid-cols-12 gap-4 py-6 border-b border-border/50 items-center group transition-colors duration-300 hover:bg-foreground/5 cursor-none"
+            >
+              {innerContent}
+            </motion.a>
+          );
+        })}
       </div>
     </section>
   );
