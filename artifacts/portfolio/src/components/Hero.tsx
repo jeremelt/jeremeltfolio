@@ -26,6 +26,8 @@ const SIDEBAR_STYLE = {
   userSelect: "none" as const,
 };
 
+const TYPED_WORDS = ["Product", "UI/UX", "Experience", "System", "Detail-Oriented", "Human-Centered"];
+
 export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
@@ -36,6 +38,9 @@ export function Hero() {
   const [archIndex, setArchIndex] = useState(0);
   const [dogIndex, setDogIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const [typedWord, setTypedWord] = useState("Product");
+  const twRef = useRef({ wordIndex: 0, charIndex: 7, phase: "pausing" as "typing" | "pausing" | "deleting" | "waiting" });
   const jeremyRef = useRef<HTMLSpanElement>(null);
   const designerRef = useRef<HTMLSpanElement>(null);
   const momentsRef = useRef<HTMLSpanElement>(null);
@@ -79,6 +84,45 @@ export function Hero() {
     }, 1500);
     return () => clearInterval(id);
   }, [isDogHovered]);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const tw = twRef.current;
+    const tick = () => {
+      const word = TYPED_WORDS[tw.wordIndex];
+      if (tw.phase === "pausing") {
+        tw.phase = "deleting";
+        timeout = setTimeout(tick, 2800);
+      } else if (tw.phase === "deleting") {
+        if (tw.charIndex === 0) {
+          tw.phase = "waiting";
+          timeout = setTimeout(tick, 180);
+        } else {
+          tw.charIndex--;
+          setTypedWord(word.slice(0, tw.charIndex));
+          timeout = setTimeout(tick, 48);
+        }
+      } else if (tw.phase === "waiting") {
+        tw.wordIndex = (tw.wordIndex + 1) % TYPED_WORDS.length;
+        tw.charIndex = 0;
+        tw.phase = "typing";
+        setTypedWord("");
+        timeout = setTimeout(tick, 220);
+      } else if (tw.phase === "typing") {
+        const nextWord = TYPED_WORDS[tw.wordIndex];
+        if (tw.charIndex >= nextWord.length) {
+          tw.phase = "pausing";
+          timeout = setTimeout(tick, 200);
+        } else {
+          tw.charIndex++;
+          setTypedWord(nextWord.slice(0, tw.charIndex));
+          timeout = setTimeout(tick, 82);
+        }
+      }
+    };
+    timeout = setTimeout(tick, 2800);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -377,7 +421,7 @@ export function Hero() {
               animate={{ opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
-              is a Product
+              is a {typedWord}<span className="tw-cursor">|</span>
             </motion.span>
             <br />
             {/* "Designer." */}

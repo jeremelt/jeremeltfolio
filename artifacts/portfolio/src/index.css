@@ -226,3 +226,18 @@
   vertical-align: text-bottom;
   animation: splash-blink 0.8s step-end infinite;
 }
+
+/* Typewriter cursor in hero */
+@keyframes tw-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.tw-cursor {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 300;
+  margin-left: 2px;
+  animation: tw-blink 0.75s step-end infinite;
+  color: #c7ee4f;
+  opacity: 0.7;
+}
