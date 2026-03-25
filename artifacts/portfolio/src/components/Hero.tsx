@@ -259,7 +259,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="w-full"
         >
-          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none">moments 📸</span>, appreciating architecture 🏛️, and spending playful time with his dog 🐶.</p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating architecture 🏛️, and spending playful time with his dog 🐶.</p>
 
           <button
             onClick={scrollToProjects}
