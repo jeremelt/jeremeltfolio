@@ -77,7 +77,7 @@ export function Navbar() {
             </button>
           ))}
           <a
-            href="https://drive.google.com/file/d/1mDG-Dfzzv8fVHbqrNpMjCYUoZmjysAFZ/view?usp=sharing"
+            href="https://drive.google.com/file/d/1sg72JYU4AsZFpuh4QixU7BSiSsbaZEsh/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="font-sans text-sm font-medium tracking-wide uppercase px-4 py-1.5 border border-foreground/40 rounded-full hover:border-accent hover:text-accent transition-colors"
