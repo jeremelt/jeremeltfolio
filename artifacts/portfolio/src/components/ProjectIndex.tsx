@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const PROJECTS = [
-  { id: "01", name: "[Project Alpha]", platform: "iOS App", category: "Product Design", locked: false },
+  { id: "01", name: "Wannabee: Know Your True Self", platform: "Mobile App", category: "Design Challenge", locked: false, link: "https://jeremelt.notion.site/Design-Challenge-Wannabee-2ff5137bc09a80718c5dd852331d6e94" },
   { id: "02", name: "[Project Beta]", platform: "Web", category: "Branding", locked: true },
   { id: "03", name: "[Project Gamma]", platform: "Dashboard", category: "UX Research", locked: false },
   { id: "04", name: "[Project Delta]", platform: "Mobile", category: "Motion Design", locked: true },
@@ -30,7 +30,9 @@ export function ProjectIndex() {
         {/* Table Rows */}
         {PROJECTS.map((project, index) => (
           <motion.a
-            href={project.locked ? undefined : "#"}
+            href={project.locked ? undefined : (project.link ?? "#")}
+            target={project.link ? "_blank" : undefined}
+            rel={project.link ? "noopener noreferrer" : undefined}
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
