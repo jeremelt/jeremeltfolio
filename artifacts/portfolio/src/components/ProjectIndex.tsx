@@ -2,11 +2,9 @@ import { motion } from "framer-motion";
 
 const PROJECTS = [
   { id: "01", name: "Wannabee: Know Your True Self", platform: "Mobile App", category: "Design Challenge", locked: false, link: "https://jeremelt.notion.site/Design-Challenge-Wannabee-2ff5137bc09a80718c5dd852331d6e94" },
-  { id: "02", name: "[Project Beta]", platform: "Web", category: "Branding", locked: true },
-  { id: "03", name: "[Project Gamma]", platform: "Dashboard", category: "UX Research", locked: false },
-  { id: "04", name: "[Project Delta]", platform: "Mobile", category: "Motion Design", locked: true },
-  { id: "05", name: "[Project Epsilon]", platform: "Web App", category: "Design System", locked: false },
-  { id: "06", name: "[Project Zeta]", platform: "Multi-platform", category: "Product Strategy", locked: false },
+  { id: "02", name: "Aloshop - Product Scraping", platform: "Web", category: "Product Design - Confidential", locked: true },
+  { id: "03", name: "Self-Service Warehouse Onboarding", platform: "Web", category: "Design Exploration - Confidential", locked: true },
+  { id: "04", name: "ERP Recruitment Process Redesign", platform: "Web", category: "Product Design - Confidential", locked: true },
 ];
 
 export function ProjectIndex() {
