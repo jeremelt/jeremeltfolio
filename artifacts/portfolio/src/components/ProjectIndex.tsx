@@ -49,11 +49,15 @@ function ScatteredGallery({
   items,
   onSelect,
   footer,
+  square = false,
 }: {
   items: GalleryItem[];
   onSelect: (item: GalleryItem) => void;
   footer: string;
+  square?: boolean;
 }) {
+  const cardW = 220;
+  const imgH = square ? cardW : 260;
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -62,7 +66,10 @@ function ScatteredGallery({
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className="w-full"
     >
-      <div className="flex flex-wrap justify-center gap-10 py-12">
+      <div
+        className="flex flex-wrap justify-center gap-10 py-12 mx-auto"
+        style={square ? { maxWidth: cardW * 3 + 40 * 2 } : undefined}
+      >
         {items.map((item, i) => (
           <motion.div
             key={item.label}
@@ -76,13 +83,13 @@ function ScatteredGallery({
           >
             <div
               className="bg-[#F2EDE3] shadow-2xl"
-              style={{ padding: "12px 12px 40px 12px", width: 220, borderRadius: 4 }}
+              style={{ padding: "12px 12px 40px 12px", width: cardW, borderRadius: 4 }}
             >
               <img
                 src={item.src}
                 alt={item.label}
                 className="w-full object-cover"
-                style={{ height: 260, display: "block", borderRadius: 2 }}
+                style={{ height: imgH, display: "block", borderRadius: 2 }}
                 draggable={false}
               />
               <div className="flex justify-between items-end px-1 pt-3">
@@ -241,6 +248,7 @@ export function ProjectIndex() {
             items={GRAPHICS}
             onSelect={setSelectedItem}
             footer="Digital illustration · Adobe Illustrator"
+            square
           />
         )}
       </AnimatePresence>
