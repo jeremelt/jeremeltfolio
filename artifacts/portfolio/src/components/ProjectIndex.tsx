@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sketch1 from "@assets/Sketch_1774425780668.jpeg";
 import sketch2 from "@assets/Sketch001_1774425780707.jpeg";
@@ -23,6 +23,13 @@ const SKETCHES = [
 
 export function ProjectIndex() {
   const [activeTab, setActiveTab] = useState<"works" | "sketches">("works");
+  const [selectedSketch, setSelectedSketch] = useState<typeof SKETCHES[0] | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedSketch(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
@@ -158,6 +165,7 @@ export function ProjectIndex() {
               {SKETCHES.map((sketch, i) => (
                 <motion.div
                   key={sketch.label}
+                  onClick={() => setSelectedSketch(sketch)}
                   initial={{ opacity: 0, scale: 0.88, rotate: sketch.rotate * 0.5 }}
                   animate={{
                     opacity: 1,
@@ -175,7 +183,7 @@ export function ProjectIndex() {
                     rotate: 0,
                     x: 0,
                     y: -8,
-                    scale: 1.04,
+                    scale: 1.06,
                     zIndex: 10,
                     transition: { duration: 0.25, ease: "easeOut" },
                   }}
@@ -218,6 +226,59 @@ export function ProjectIndex() {
             <p className="text-center font-sans text-xs text-muted-foreground tracking-widest uppercase mt-4 opacity-50">
               Ink on paper · Field sketches
             </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* Sketch lightbox modal */}
+      <AnimatePresence>
+        {selectedSketch && (
+          <motion.div
+            className="fixed inset-0 z-[300] flex items-center justify-center p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setSelectedSketch(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+
+            {/* Modal card */}
+            <motion.div
+              className="relative z-10 flex flex-col items-center"
+              initial={{ scale: 0.88, opacity: 0, y: 24 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.88, opacity: 0, y: 24 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Polaroid wrapper */}
+              <div
+                className="bg-[#F2EDE3] shadow-2xl"
+                style={{ padding: "16px 16px 56px 16px", borderRadius: 4, maxWidth: "min(90vw, 640px)" }}
+              >
+                <img
+                  src={selectedSketch.src}
+                  alt={selectedSketch.label}
+                  className="w-full object-contain block"
+                  style={{ maxHeight: "65vh", borderRadius: 2 }}
+                  draggable={false}
+                />
+                <div className="flex justify-between items-end px-1 pt-4">
+                  <span className="font-sans text-sm font-medium text-[#5a4a3a] uppercase tracking-widest">
+                    {selectedSketch.label}
+                  </span>
+                  <span className="font-sans text-xs text-[#9a8a7a] tabular-nums">
+                    {selectedSketch.date}
+                  </span>
+                </div>
+              </div>
+
+              {/* Close hint */}
+              <p className="mt-5 font-sans text-xs text-white/40 tracking-widest uppercase">
+                Click outside or press Esc to close
+              </p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
