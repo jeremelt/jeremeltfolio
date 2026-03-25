@@ -32,7 +32,7 @@ export default function Home() {
       <Navbar />
       
       <main>
-        <Hero />
+        <Hero splashDone={splashDone} />
         
         <Marquee text="Product Designer · UI/UX Designer · Bachelor of Architecture · Photography & Art Enthusiast · " />
         

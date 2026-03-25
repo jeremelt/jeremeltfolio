@@ -28,7 +28,7 @@ const SIDEBAR_STYLE = {
 
 const TYPED_WORDS = ["a Product", "an Experience", "a Service", "a Detail-Oriented", "a Human-Focused", "a Thoughtful", "an Observant"];
 
-export function Hero() {
+export function Hero({ splashDone = false }: { splashDone?: boolean }) {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
   const [isMomentsHovered, setIsMomentsHovered] = useState(false);
@@ -86,6 +86,7 @@ export function Hero() {
   }, [isDogHovered]);
 
   useEffect(() => {
+    if (!splashDone) return;
     let timeout: ReturnType<typeof setTimeout>;
     const tw = twRef.current;
     const tick = () => {
@@ -122,7 +123,7 @@ export function Hero() {
     };
     timeout = setTimeout(tick, 2800);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [splashDone]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
