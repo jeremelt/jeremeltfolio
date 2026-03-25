@@ -17,10 +17,7 @@ export function ProjectIndex() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="font-sans text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground mb-16"
-      >
-        All Projects
-      </motion.h2>
-
+      >All Works</motion.h2>
       <div className="w-full flex flex-col border-t border-border">
         {/* Table Header */}
         <div className="grid grid-cols-12 gap-4 py-4 border-b border-border/50 text-xs font-sans tracking-widest uppercase text-muted-foreground">
