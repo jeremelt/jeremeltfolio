@@ -26,7 +26,7 @@ const SIDEBAR_STYLE = {
   userSelect: "none" as const,
 };
 
-const TYPED_WORDS = ["Product", "UI/UX", "Experience", "System", "Detail-Oriented", "Human-Centered"];
+const TYPED_WORDS = ["a Product", "a UI/UX", "an Experience", "a System", "a Detail-Oriented", "a Human-Centered"];
 
 export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
@@ -39,8 +39,8 @@ export function Hero() {
   const [dogIndex, setDogIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const [typedWord, setTypedWord] = useState("Product");
-  const twRef = useRef({ wordIndex: 0, charIndex: 7, phase: "pausing" as "typing" | "pausing" | "deleting" | "waiting" });
+  const [typedWord, setTypedWord] = useState("a Product");
+  const twRef = useRef({ wordIndex: 0, charIndex: 9, phase: "pausing" as "typing" | "pausing" | "deleting" | "waiting" });
   const jeremyRef = useRef<HTMLSpanElement>(null);
   const designerRef = useRef<HTMLSpanElement>(null);
   const momentsRef = useRef<HTMLSpanElement>(null);
@@ -421,7 +421,7 @@ export function Hero() {
               animate={{ opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
-              is a {typedWord}<span className="tw-cursor">|</span>
+              is {typedWord}<span className="tw-cursor">|</span>
             </motion.span>
             <br />
             {/* "Designer." */}
