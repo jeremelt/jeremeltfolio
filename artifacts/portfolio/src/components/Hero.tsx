@@ -26,7 +26,7 @@ const SIDEBAR_STYLE = {
   userSelect: "none" as const,
 };
 
-const TYPED_WORDS = ["a Product", "a UI/UX", "an Experience", "a System", "a Detail-Oriented", "a Human-Centered"];
+const TYPED_WORDS = ["a Product", "an Experience", "a Service", "a Detail-Oriented", "a Human-Focused", "a Thoughtful", "an Observant"];
 
 export function Hero() {
   const [isJeremyHovered, setIsJeremyHovered] = useState(false);
