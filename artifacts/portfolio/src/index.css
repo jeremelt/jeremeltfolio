@@ -152,6 +152,15 @@
     cursor: none;
   }
 
+  /* Restore native cursor on touch/mobile devices — no custom cursor needed */
+  @media (pointer: coarse) {
+    *, a, button, input, select, textarea {
+      cursor: auto !important;
+    }
+    a { cursor: pointer !important; }
+    button { cursor: pointer !important; }
+  }
+
   html {
     scroll-behavior: smooth;
   }

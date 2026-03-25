@@ -4,8 +4,19 @@ import { motion } from "framer-motion";
 export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouch, setIsTouch] = useState(true);
 
   useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse)");
+    setIsTouch(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (isTouch) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -32,24 +43,24 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isTouch]);
+
+  if (isTouch) return null;
 
   return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-accent rounded-full pointer-events-none z-[100] mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 6,
-          y: mousePosition.y - 6,
-          scale: isHovering ? 4 : 1,
-          opacity: 1,
-        }}
-        transition={{
-          x: { type: "tween", ease: "linear", duration: 0 },
-          y: { type: "tween", ease: "linear", duration: 0 },
-          scale: { type: "spring", stiffness: 300, damping: 22, mass: 0.5 },
-        }}
-      />
-    </>
+    <motion.div
+      className="fixed top-0 left-0 w-3 h-3 bg-accent rounded-full pointer-events-none z-[100] mix-blend-difference"
+      animate={{
+        x: mousePosition.x - 6,
+        y: mousePosition.y - 6,
+        scale: isHovering ? 4 : 1,
+        opacity: 1,
+      }}
+      transition={{
+        x: { type: "tween", ease: "linear", duration: 0 },
+        y: { type: "tween", ease: "linear", duration: 0 },
+        scale: { type: "spring", stiffness: 300, damping: 22, mass: 0.5 },
+      }}
+    />
   );
 }
