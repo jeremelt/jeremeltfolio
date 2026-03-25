@@ -168,10 +168,10 @@ export function Hero() {
             transition={cardTransition}
             style={{ top: 0, left: 0 }}
           >
-            <div className="relative flex shadow-2xl" style={{ width: 280, borderRadius: 8, overflow: "hidden", background: "#1C1C1C" }}>
+            <div className="relative flex shadow-2xl" style={{ width: 280, borderRadius: 8, overflow: "hidden", background: "#EDE8DC" }}>
               {/* Sidebar */}
-              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#141414", alignSelf: "stretch" }}>
-                <span style={{ ...SIDEBAR_STYLE, color: "#555" }}>
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#DDD8CC", alignSelf: "stretch" }}>
+                <span style={{ ...SIDEBAR_STYLE, color: "#8a8478" }}>
                   EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE
                 </span>
               </div>
@@ -201,10 +201,10 @@ export function Hero() {
                 {/* Caption */}
                 <div className="flex items-start mt-3 gap-2">
                   <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-                    <path d="M4 4 C4 12, 12 18, 18 16" stroke="#555" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                    <path d="M15 13 L18 16 L14 17" stroke="#555" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M4 4 C4 12, 12 18, 18 16" stroke="#5a5448" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    <path d="M15 13 L18 16 L14 17" stroke="#5a5448" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13, color: "#aaa", lineHeight: 1.4, fontWeight: 400 }}>
+                  <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13, color: "#3a3530", lineHeight: 1.4, fontWeight: 400 }}>
                     here are some pics he took!
                   </p>
                 </div>
@@ -259,7 +259,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="w-full"
         >
-          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none underline underline-offset-4 decoration-dotted decoration-foreground/30 hover:decoration-foreground/60 transition-all">moments 📸</span>, appreciating architecture 🏛️, and spending playful time with his dog 🐶.</p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none">moments 📸</span>, appreciating architecture 🏛️, and spending playful time with his dog 🐶.</p>
 
           <button
             onClick={scrollToProjects}
