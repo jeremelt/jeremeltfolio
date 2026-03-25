@@ -7,9 +7,13 @@ import photo3 from "@assets/DSC_0316_1774410658467.JPG";
 import arch1 from "@assets/28157804_1962864647364689_7435526247024689152_n_1774411299142.jpg";
 import arch2 from "@assets/75362577_165659311468511_3581380266778449708_n_1774411299144.jpg";
 import arch3 from "@assets/75538185_1051752435179252_1790554123296458632_n_1774411299144.jpg";
+import dog1 from "@assets/Edit_1_3_1774421181402.png";
+import dog2 from "@assets/Edit_1_4_(1)_1774421181410.png";
+import dog3 from "@assets/IMG_3805_1_1774421181414.png";
 
 const PHOTOS = [photo1, photo2, photo3];
 const ARCH_PHOTOS = [arch1, arch2, arch3];
+const DOG_PHOTOS = [dog1, dog2, dog3];
 
 const SIDEBAR_STYLE = {
   writingMode: "vertical-rl" as const,
@@ -27,13 +31,16 @@ export function Hero() {
   const [isDesignerHovered, setIsDesignerHovered] = useState(false);
   const [isMomentsHovered, setIsMomentsHovered] = useState(false);
   const [isArchHovered, setIsArchHovered] = useState(false);
+  const [isDogHovered, setIsDogHovered] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [archIndex, setArchIndex] = useState(0);
+  const [dogIndex, setDogIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const jeremyRef = useRef<HTMLSpanElement>(null);
   const designerRef = useRef<HTMLSpanElement>(null);
   const momentsRef = useRef<HTMLSpanElement>(null);
   const archRef = useRef<HTMLSpanElement>(null);
+  const dogRef = useRef<HTMLSpanElement>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
   const checkHits = useCallback((x: number, y: number) => {
@@ -46,6 +53,7 @@ export function Hero() {
     setIsDesignerHovered(hit(designerRef));
     setIsMomentsHovered(hit(momentsRef));
     setIsArchHovered(hit(archRef));
+    setIsDogHovered(hit(dogRef));
   }, []);
 
   useEffect(() => {
@@ -63,6 +71,14 @@ export function Hero() {
     }, 1500);
     return () => clearInterval(id);
   }, [isArchHovered]);
+
+  useEffect(() => {
+    if (!isDogHovered) return;
+    const id = setInterval(() => {
+      setDogIndex(i => (i + 1) % DOG_PHOTOS.length);
+    }, 1500);
+    return () => clearInterval(id);
+  }, [isDogHovered]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -284,6 +300,60 @@ export function Hero() {
         )}
       </AnimatePresence>
 
+      {/* Dog — cycling Kelly card */}
+      <AnimatePresence>
+        {isDogHovered && (
+          <motion.div
+            className="fixed pointer-events-none z-[200]"
+            initial={{ opacity: 0, scale: 0.85, rotate: 4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 3, x: mousePos.x - 150, y: mousePos.y - 310 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={cardTransition}
+            style={{ top: 0, left: 0 }}
+          >
+            <div className="relative flex shadow-2xl" style={{ width: 280, borderRadius: 8, overflow: "hidden", background: "#D4B896" }}>
+              {/* Sidebar */}
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 22, background: "#C4A880", alignSelf: "stretch" }}>
+                <span style={{ ...SIDEBAR_STYLE, color: "#7a5535" }}>
+                  EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE&nbsp;&nbsp;·&nbsp;&nbsp;EDITOR&apos;S NOTE
+                </span>
+              </div>
+              {/* Content */}
+              <div className="flex-1 flex flex-col" style={{ padding: "14px 14px 16px 12px" }}>
+                <div style={{ position: "relative", height: 220, borderRadius: 8, overflow: "hidden", background: "#b8935a" }}>
+                  <AnimatePresence mode="sync">
+                    <motion.img
+                      key={dogIndex}
+                      src={DOG_PHOTOS[dogIndex]}
+                      alt={`Kelly ${dogIndex + 1}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </AnimatePresence>
+                  <div style={{ position: "absolute", bottom: 8, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 5 }}>
+                    {DOG_PHOTOS.map((_, i) => (
+                      <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: i === dogIndex ? "#C8F04E" : "rgba(255,255,255,0.45)", transition: "background 0.3s" }} />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-start mt-3 gap-2">
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
+                    <path d="M4 4 C4 12, 12 18, 18 16" stroke="#7a5535" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    <path d="M15 13 L18 16 L14 17" stroke="#7a5535" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13, color: "#3d1f08", lineHeight: 1.4, fontWeight: 400 }}>
+                    meet Kelly: my tiny, fluffy bundle of joy with a big personality.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex-1 flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -329,7 +399,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="w-full"
         >
-          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating <span ref={archRef} className="cursor-none" data-cursor="hover">architecture 🏛️</span>, and spending playful time with his dog 🐶.</p>
+          <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating <span ref={archRef} className="cursor-none" data-cursor="hover">architecture 🏛️</span>, and spending playful time with his <span ref={dogRef} className="cursor-none" data-cursor="hover">dog 🐶</span>.</p>
 
           <button
             onClick={scrollToProjects}
