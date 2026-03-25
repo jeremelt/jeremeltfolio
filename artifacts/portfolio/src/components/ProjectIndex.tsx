@@ -68,7 +68,7 @@ export function ProjectIndex() {
                 />
               )}
               <span className="relative z-10">
-                {tab === "works" ? "Design Work" : "Sketches"}
+                {tab === "works" ? "Product Design" : "Sketch"}
               </span>
             </button>
           ))}
