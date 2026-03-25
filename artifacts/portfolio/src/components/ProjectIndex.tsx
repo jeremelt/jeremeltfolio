@@ -5,6 +5,12 @@ import sketch2 from "@assets/Sketch001_1774425780707.jpeg";
 import sketch3 from "@assets/Sketch002_1774425780708.jpeg";
 import sketch4 from "@assets/Sketch003_1774425780709.jpeg";
 import sketch5 from "@assets/Sketch004_1774425780710.jpeg";
+const graphic1 = "/images/graphic-icons.jpg";
+const graphic2 = "/images/graphic-dolphin-love.webp";
+const graphic3 = "/images/graphic-dolphin-happy.jpeg";
+const graphic4 = "/images/graphic-belly-grumbling.jpg";
+const graphic5 = "/images/graphic-killer-whale.jpeg";
+const graphic6 = "/images/graphic-merry-christmas.jpg";
 
 const PROJECTS = [
   { id: "01", name: "Wannabee: Know Your True Self", platform: "Mobile App", category: "Design Challenge", locked: false, link: "https://jeremelt.notion.site/Design-Challenge-Wannabee-2ff5137bc09a80718c5dd852331d6e94" },
@@ -21,12 +27,92 @@ const SKETCHES = [
   { src: sketch5, label: "Coffee Bar",        date: "22.09.23", rotate: -4, tx: -14, ty: 8 },
 ];
 
+const GRAPHICS = [
+  { src: graphic1, label: "Icon Set",           date: "2021", rotate: -4, tx: 0,   ty: 8 },
+  { src: graphic2, label: "Dolphin in Love",    date: "2020", rotate:  5, tx: 10,  ty: -10 },
+  { src: graphic3, label: "Happy Dolphin",      date: "2020", rotate: -3, tx: -10, ty: 14 },
+  { src: graphic4, label: "My Belly Grumbling", date: "2020", rotate:  4, tx: 8,   ty: -6 },
+  { src: graphic5, label: "Killer Whale",       date: "2020", rotate: -6, tx: -6,  ty: 10 },
+  { src: graphic6, label: "Merry Christmas",    date: "2020", rotate:  3, tx: 14,  ty: -14 },
+];
+
+type GalleryItem = typeof SKETCHES[0];
+
+const TABS = [
+  { key: "works",   label: "Product Design" },
+  { key: "sketches", label: "Sketch" },
+  { key: "graphic",  label: "Graphic Design" },
+] as const;
+type TabKey = typeof TABS[number]["key"];
+
+function ScatteredGallery({
+  items,
+  onSelect,
+  footer,
+}: {
+  items: GalleryItem[];
+  onSelect: (item: GalleryItem) => void;
+  footer: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full"
+    >
+      <div className="flex flex-wrap justify-center gap-10 py-12">
+        {items.map((item, i) => (
+          <motion.div
+            key={item.label}
+            onClick={() => onSelect(item)}
+            initial={{ opacity: 0, scale: 0.88, rotate: item.rotate * 0.5 }}
+            animate={{ opacity: 1, scale: 1, rotate: item.rotate, x: item.tx, y: item.ty }}
+            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ rotate: 0, x: 0, y: -8, scale: 1.06, zIndex: 10, transition: { duration: 0.25, ease: "easeOut" } }}
+            className="relative cursor-none"
+            style={{ zIndex: i + 1 }}
+          >
+            <div
+              className="bg-[#F2EDE3] shadow-2xl"
+              style={{ padding: "12px 12px 40px 12px", width: 220, borderRadius: 4 }}
+            >
+              <img
+                src={item.src}
+                alt={item.label}
+                className="w-full object-cover"
+                style={{ height: 260, display: "block", borderRadius: 2 }}
+                draggable={false}
+              />
+              <div className="flex justify-between items-end px-1 pt-3">
+                <span
+                  className="font-sans text-[11px] font-medium text-[#5a4a3a] uppercase tracking-widest leading-tight"
+                  style={{ maxWidth: 130 }}
+                >
+                  {item.label}
+                </span>
+                <span className="font-sans text-[10px] text-[#9a8a7a] tabular-nums">
+                  {item.date}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <p className="text-center font-sans text-xs text-muted-foreground tracking-widest uppercase mt-4 opacity-50">
+        {footer}
+      </p>
+    </motion.div>
+  );
+}
+
 export function ProjectIndex() {
-  const [activeTab, setActiveTab] = useState<"works" | "sketches">("works");
-  const [selectedSketch, setSelectedSketch] = useState<typeof SKETCHES[0] | null>(null);
+  const [activeTab, setActiveTab] = useState<TabKey>("works");
+  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedSketch(null); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedItem(null); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
@@ -52,24 +138,22 @@ export function ProjectIndex() {
           transition={{ delay: 0.15 }}
           className="flex items-center gap-1 border border-border/40 rounded-lg p-1"
         >
-          {(["works", "sketches"] as const).map((tab) => (
+          {TABS.map(({ key, label }) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`relative px-4 py-1.5 rounded-md font-sans text-sm font-medium tracking-wide capitalize transition-colors duration-200 cursor-none ${
-                activeTab === tab ? "text-background" : "text-muted-foreground hover:text-foreground"
+              key={key}
+              onClick={() => setActiveTab(key)}
+              className={`relative px-4 py-1.5 rounded-md font-sans text-sm font-medium tracking-wide transition-colors duration-200 cursor-none ${
+                activeTab === key ? "text-background" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {activeTab === tab && (
+              {activeTab === key && (
                 <motion.div
                   layoutId="project-tab-bg"
                   className="absolute inset-0 bg-foreground rounded-md"
                   transition={{ type: "spring", stiffness: 400, damping: 35 }}
                 />
               )}
-              <span className="relative z-10">
-                {tab === "works" ? "Product Design" : "Sketch"}
-              </span>
+              <span className="relative z-10">{label}</span>
             </button>
           ))}
         </motion.div>
@@ -85,7 +169,6 @@ export function ProjectIndex() {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="w-full flex flex-col border-t border-border"
           >
-            {/* Table Header */}
             <div className="grid grid-cols-12 gap-4 py-4 border-b border-border/50 text-xs font-sans tracking-widest uppercase text-muted-foreground">
               <div className="col-span-2 md:col-span-1">No.</div>
               <div className="col-span-10 md:col-span-6">Project Name</div>
@@ -108,20 +191,12 @@ export function ProjectIndex() {
 
               const innerContent = (
                 <>
-                  <div className="col-span-2 md:col-span-1 font-sans text-sm text-muted-foreground">
-                    {project.id}
-                  </div>
-                  <div className="col-span-10 md:col-span-6 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">
-                    {project.name}
-                  </div>
-                  <div className="hidden md:block md:col-span-3 font-sans text-sm text-muted-foreground">
-                    {project.platform}
-                  </div>
+                  <div className="col-span-2 md:col-span-1 font-sans text-sm text-muted-foreground">{project.id}</div>
+                  <div className="col-span-10 md:col-span-6 font-display text-2xl md:text-3xl group-hover:text-accent transition-colors">{project.name}</div>
+                  <div className="hidden md:block md:col-span-3 font-sans text-sm text-muted-foreground">{project.platform}</div>
                   <div className="hidden md:block md:col-span-2 font-sans text-sm text-muted-foreground leading-snug">
                     <span>{categoryMain}</span>
-                    {categorySub && (
-                      <><br /><span className="text-xs opacity-60">{categorySub}</span></>
-                    )}
+                    {categorySub && <><br /><span className="text-xs opacity-60">{categorySub}</span></>}
                   </div>
                 </>
               );
@@ -136,7 +211,6 @@ export function ProjectIndex() {
                   </motion.div>
                 );
               }
-
               return (
                 <motion.a
                   {...sharedMotionProps}
@@ -153,97 +227,36 @@ export function ProjectIndex() {
         )}
 
         {activeTab === "sketches" && (
-          <motion.div
+          <ScatteredGallery
             key="sketches"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full"
-          >
-            <div className="flex flex-wrap justify-center gap-10 py-12">
-              {SKETCHES.map((sketch, i) => (
-                <motion.div
-                  key={sketch.label}
-                  onClick={() => setSelectedSketch(sketch)}
-                  initial={{ opacity: 0, scale: 0.88, rotate: sketch.rotate * 0.5 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    rotate: sketch.rotate,
-                    x: sketch.tx,
-                    y: sketch.ty,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    delay: i * 0.09,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  whileHover={{
-                    rotate: 0,
-                    x: 0,
-                    y: -8,
-                    scale: 1.06,
-                    zIndex: 10,
-                    transition: { duration: 0.25, ease: "easeOut" },
-                  }}
-                  className="relative cursor-none"
-                  style={{ zIndex: i + 1 }}
-                >
-                  {/* Polaroid card */}
-                  <div
-                    className="bg-[#F2EDE3] shadow-2xl"
-                    style={{
-                      padding: "12px 12px 40px 12px",
-                      width: 220,
-                      borderRadius: 4,
-                    }}
-                  >
-                    <img
-                      src={sketch.src}
-                      alt={sketch.label}
-                      className="w-full object-cover"
-                      style={{ height: 260, display: "block", borderRadius: 2 }}
-                      draggable={false}
-                    />
-                    {/* Polaroid caption strip */}
-                    <div className="flex justify-between items-end px-1 pt-3">
-                      <span
-                        className="font-sans text-[11px] font-medium text-[#5a4a3a] uppercase tracking-widest leading-tight"
-                        style={{ maxWidth: 130 }}
-                      >
-                        {sketch.label}
-                      </span>
-                      <span className="font-sans text-[10px] text-[#9a8a7a] tabular-nums">
-                        {sketch.date}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            items={SKETCHES}
+            onSelect={setSelectedItem}
+            footer="Ink on paper · Field sketches"
+          />
+        )}
 
-            <p className="text-center font-sans text-xs text-muted-foreground tracking-widest uppercase mt-4 opacity-50">
-              Ink on paper · Field sketches
-            </p>
-          </motion.div>
+        {activeTab === "graphic" && (
+          <ScatteredGallery
+            key="graphic"
+            items={GRAPHICS}
+            onSelect={setSelectedItem}
+            footer="Digital illustration · Adobe Illustrator"
+          />
         )}
       </AnimatePresence>
-      {/* Sketch lightbox modal */}
+
+      {/* Lightbox modal — shared between sketch & graphic tabs */}
       <AnimatePresence>
-        {selectedSketch && (
+        {selectedItem && (
           <motion.div
             className="fixed inset-0 z-[300] flex items-center justify-center p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            onClick={() => setSelectedSketch(null)}
+            onClick={() => setSelectedItem(null)}
           >
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-
-            {/* Modal card */}
             <motion.div
               className="relative z-10 flex flex-col items-center"
               initial={{ scale: 0.88, opacity: 0, y: 24 }}
@@ -252,29 +265,26 @@ export function ProjectIndex() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Polaroid wrapper */}
               <div
                 className="bg-[#F2EDE3] shadow-2xl"
                 style={{ padding: "16px 16px 56px 16px", borderRadius: 4, maxWidth: "min(90vw, 640px)" }}
               >
                 <img
-                  src={selectedSketch.src}
-                  alt={selectedSketch.label}
+                  src={selectedItem.src}
+                  alt={selectedItem.label}
                   className="w-full object-contain block"
                   style={{ maxHeight: "65vh", borderRadius: 2 }}
                   draggable={false}
                 />
                 <div className="flex justify-between items-end px-1 pt-4">
                   <span className="font-sans text-sm font-medium text-[#5a4a3a] uppercase tracking-widest">
-                    {selectedSketch.label}
+                    {selectedItem.label}
                   </span>
                   <span className="font-sans text-xs text-[#9a8a7a] tabular-nums">
-                    {selectedSketch.date}
+                    {selectedItem.date}
                   </span>
                 </div>
               </div>
-
-              {/* Close hint */}
               <p className="mt-5 font-sans text-xs text-white/40 tracking-widest uppercase">
                 Click outside or press Esc to close
               </p>
