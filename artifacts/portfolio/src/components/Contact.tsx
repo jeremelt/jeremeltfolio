@@ -23,7 +23,7 @@ export function Contact() {
         </motion.h2>
 
         <motion.a
-          href="mailto:your@email.com"
+          href="mailto:jeremymeldika@gmail.com"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
