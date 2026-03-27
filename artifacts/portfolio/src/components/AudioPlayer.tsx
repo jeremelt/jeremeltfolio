@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function AudioPlayer() {
@@ -6,38 +6,55 @@ export function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.25);
   const [showVolume, setShowVolume] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const startAudio = useCallback(() => {
-    if (started || !audioRef.current) return;
-    setStarted(true);
-    audioRef.current.volume = volume;
-    audioRef.current
-      .play()
-      .then(() => setIsPlaying(true))
-      .catch(() => {});
-  }, [started, volume]);
-
   useEffect(() => {
-    const events = ["click", "keydown", "scroll", "touchstart"];
-    const handler = () => startAudio();
-    events.forEach((e) =>
-      document.addEventListener(e, handler, { once: true, passive: true })
-    );
-    return () =>
-      events.forEach((e) => document.removeEventListener(e, handler));
-  }, [startAudio]);
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = volume;
 
-  const toggleMute = () => {
-    if (!audioRef.current) return;
-    startAudio();
+    // Attempt immediate autoplay
+    audio.play().then(() => {
+      setIsPlaying(true);
+    }).catch(() => {
+      // Browser blocked autoplay — wait for first user gesture
+      setAutoplayBlocked(true);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Once blocked, start on first interaction
+  useEffect(() => {
+    if (!autoplayBlocked) return;
+
+    const resume = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio.volume = volume;
+      audio.play().then(() => {
+        setIsPlaying(true);
+        setAutoplayBlocked(false);
+      }).catch(() => {});
+    };
+
+    const events = ["click", "keydown", "scroll", "touchstart"] as const;
+    events.forEach((e) =>
+      document.addEventListener(e, resume, { once: true, passive: true })
+    );
+    return () => events.forEach((e) => document.removeEventListener(e, resume));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoplayBlocked]);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.volume = volume;
-      audioRef.current.play().catch(() => {});
+      audio.volume = volume;
+      audio.play().catch(() => {});
       setIsPlaying(true);
     }
   };
@@ -45,15 +62,15 @@ export function AudioPlayer() {
   const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = parseFloat(e.target.value);
     setVolume(v);
-    if (audioRef.current) {
-      audioRef.current.volume = v;
-      if (v === 0) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else if (!isPlaying) {
-        audioRef.current.play().catch(() => {});
-        setIsPlaying(true);
-      }
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = v;
+    if (v === 0) {
+      audio.pause();
+      setIsPlaying(false);
+    } else if (!isPlaying) {
+      audio.play().catch(() => {});
+      setIsPlaying(true);
     }
   };
 
@@ -110,7 +127,6 @@ export function AudioPlayer() {
                   step={0.01}
                   value={volume}
                   onChange={handleVolume}
-                  className="volume-slider"
                   style={{
                     writingMode: "vertical-lr" as React.CSSProperties["writingMode"],
                     direction: "rtl",
@@ -135,7 +151,7 @@ export function AudioPlayer() {
 
         {/* Main button */}
         <motion.button
-          onClick={toggleMute}
+          onClick={togglePlay}
           data-cursor="hover"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.93 }}
@@ -149,7 +165,7 @@ export function AudioPlayer() {
               : "0 4px 20px rgba(0,0,0,0.4)",
             transition: "background 0.3s ease, box-shadow 0.3s ease",
           }}
-          aria-label={isPlaying ? "Mute background music" : "Play background music"}
+          aria-label={isPlaying ? "Pause background music" : "Play background music"}
         >
           {isPlaying ? <PlayingIcon /> : <MutedIcon />}
         </motion.button>
@@ -167,7 +183,6 @@ function PlayingIcon() {
           x={4 + i * 5}
           rx={1.5}
           width={3}
-          style={{ originY: 1 }}
           fill="#0D0D0D"
           animate={{ height: [4, 12, 4], y: [13, 5, 13] }}
           transition={{
