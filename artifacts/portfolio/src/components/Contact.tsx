@@ -9,8 +9,37 @@ const SOCIALS = [
   { name: "Medium", url: "https://medium.com/@jeremelt" },
 ];
 
+function StalkEyes() {
+  return (
+    <svg width="88" height="44" viewBox="0 0 88 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Left eye white */}
+      <ellipse cx="22" cy="22" rx="20" ry="16" fill="white" />
+      {/* Left pupil group — slides left to right */}
+      <motion.g
+        animate={{ x: [-5, 5, -5] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.2 }}
+      >
+        <circle cx="22" cy="22" r="8" fill="#111" />
+        <circle cx="24.5" cy="19.5" r="2.5" fill="white" opacity={0.75} />
+      </motion.g>
+
+      {/* Right eye white */}
+      <ellipse cx="66" cy="22" rx="20" ry="16" fill="white" />
+      {/* Right pupil group — slides left to right */}
+      <motion.g
+        animate={{ x: [-5, 5, -5] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.2 }}
+      >
+        <circle cx="66" cy="22" r="8" fill="#111" />
+        <circle cx="68.5" cy="19.5" r="2.5" fill="white" opacity={0.75} />
+      </motion.g>
+    </svg>
+  );
+}
+
 export function Contact() {
   const [hiHovered, setHiHovered] = useState(false);
+  const [stalkHovered, setStalkHovered] = useState(false);
 
   return (
     <section id="contact" className="pt-32 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
@@ -23,6 +52,7 @@ export function Contact() {
           className="font-display text-5xl md:text-7xl lg:text-[100px] leading-[0.9] tracking-tight mb-12 max-w-4xl"
         >
           Say{" "}
+          {/* hi — waving hand */}
           <span className="relative inline-block">
             <span
               className="cursor-none"
@@ -39,11 +69,7 @@ export function Contact() {
                   className="absolute left-1/2 -translate-x-1/2 -top-[0.9em] inline-block origin-bottom select-none pointer-events-none"
                   style={{ fontSize: "0.75em" }}
                   initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    rotate: [0, 20, -10, 20, -5, 15, 0],
-                  }}
+                  animate={{ opacity: 1, scale: 1, rotate: [0, 20, -10, 20, -5, 15, 0] }}
                   exit={{ opacity: 0, scale: 0.5, rotate: -20 }}
                   transition={{
                     opacity: { duration: 0.15 },
@@ -62,7 +88,34 @@ export function Contact() {
               )}
             </AnimatePresence>
           </span>
-          {" "}or stalk him <span className="italic text-[#c7ee4e]">online.</span>
+          {" "}or{" "}
+          {/* stalk — sliding eyes */}
+          <span className="relative inline-block">
+            <span
+              className="cursor-none"
+              data-cursor="hover"
+              onMouseEnter={() => setStalkHovered(true)}
+              onMouseLeave={() => setStalkHovered(false)}
+            >
+              stalk
+            </span>
+            <AnimatePresence>
+              {stalkHovered && (
+                <motion.span
+                  key="eyes"
+                  className="absolute left-1/2 -translate-x-1/2 inline-block select-none pointer-events-none"
+                  style={{ top: "-1em" }}
+                  initial={{ opacity: 0, scale: 0.5, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.5, y: 8 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <StalkEyes />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </span>
+          {" "}him <span className="italic text-[#c7ee4e]">online.</span>
         </motion.h2>
 
         <motion.a
