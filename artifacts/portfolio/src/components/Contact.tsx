@@ -25,7 +25,8 @@ export function Contact() {
           Say{" "}
           <span className="relative inline-block">
             <span
-              className="cursor-none underline underline-offset-4 decoration-dotted decoration-foreground/30 hover:decoration-foreground/60 transition-all duration-200"
+              className="cursor-none"
+              data-cursor="hover"
               onMouseEnter={() => setHiHovered(true)}
               onMouseLeave={() => setHiHovered(false)}
             >
@@ -35,8 +36,8 @@ export function Contact() {
               {hiHovered && (
                 <motion.span
                   key="wave"
-                  className="absolute -right-[1.1em] top-0 inline-block origin-bottom-right select-none"
-                  style={{ fontSize: "0.85em" }}
+                  className="absolute left-1/2 -translate-x-1/2 -top-[0.9em] inline-block origin-bottom select-none pointer-events-none"
+                  style={{ fontSize: "0.75em" }}
                   initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
                   animate={{
                     opacity: 1,
