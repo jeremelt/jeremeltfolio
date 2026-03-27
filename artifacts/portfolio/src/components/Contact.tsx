@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SOCIALS = [
   { name: "LinkedIn", url: "https://www.linkedin.com/in/jeremymeldika/" },
@@ -9,17 +10,58 @@ const SOCIALS = [
 ];
 
 export function Contact() {
+  const [hiHovered, setHiHovered] = useState(false);
+
   return (
     <section id="contact" className="pt-32 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
       <div className="mb-24">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-5xl md:text-7xl lg:text-[100px] leading-[0.9] tracking-tight mb-12 max-w-4xl"
         >
-          Say hi or stalk him <span className="italic text-[#c7ee4e]">online.</span>
+          Say{" "}
+          <span className="relative inline-block">
+            <span
+              className="cursor-none underline underline-offset-4 decoration-dotted decoration-foreground/30 hover:decoration-foreground/60 transition-all duration-200"
+              onMouseEnter={() => setHiHovered(true)}
+              onMouseLeave={() => setHiHovered(false)}
+            >
+              hi
+            </span>
+            <AnimatePresence>
+              {hiHovered && (
+                <motion.span
+                  key="wave"
+                  className="absolute -right-[1.1em] top-0 inline-block origin-bottom-right select-none"
+                  style={{ fontSize: "0.85em" }}
+                  initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    rotate: [0, 20, -10, 20, -5, 15, 0],
+                  }}
+                  exit={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                  transition={{
+                    opacity: { duration: 0.15 },
+                    scale: { duration: 0.2, ease: [0.16, 1, 0.3, 1] },
+                    rotate: {
+                      duration: 1.1,
+                      ease: "easeInOut",
+                      times: [0, 0.15, 0.35, 0.55, 0.7, 0.85, 1],
+                      repeat: Infinity,
+                      repeatDelay: 0.3,
+                    },
+                  }}
+                >
+                  👋
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </span>
+          {" "}or stalk him <span className="italic text-[#c7ee4e]">online.</span>
         </motion.h2>
 
         <motion.a
