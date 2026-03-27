@@ -8,6 +8,7 @@ import { ProjectIndex } from "@/components/ProjectIndex";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { SplashScreen } from "@/components/SplashScreen";
+import { AudioPlayer } from "@/components/AudioPlayer";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -95,6 +96,9 @@ export default function Home() {
         
         <Contact />
       </main>
+
+      {/* Floating background music player */}
+      <AudioPlayer />
     </div>
     </>
   );
