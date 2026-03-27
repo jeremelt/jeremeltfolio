@@ -400,65 +400,90 @@ export function Hero({ splashDone = false }: { splashDone?: boolean }) {
       </AnimatePresence>
 
       <div className="flex-1 flex flex-col justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="mb-8"
-        >
+        <div className="mb-8">
           <h1 className="font-display text-[12vw] leading-[0.85] tracking-tight md:text-[8vw] lg:text-[140px] text-foreground mb-[36px]">
-            {/* "Jeremy" */}
-            <motion.span
+
+            {/* Line 1: Jeremy · Meldika — word by word */}
+            <span
               ref={jeremyRef}
-              className="inline-block cursor-none"
+              className="cursor-none"
               data-cursor="hover"
-              animate={{ opacity: isDesignerHovered ? 0.2 : 1 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-            >Jeremy Meldika</motion.span>
-            <br />
-            {/* "is a Product" */}
-            <motion.span
-              className="italic text-[#c7ee4f]"
-              animate={{ opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
+              style={{ opacity: isDesignerHovered ? 0.2 : 1, transition: "opacity 0.35s ease-in-out" }}
             >
-              is {typedWord}<span className="tw-cursor">|</span>
-            </motion.span>
+              {(["Jeremy", "Meldika"] as const).map((word, i) => (
+                <motion.span
+                  key={word}
+                  className="inline-block"
+                  style={{ marginRight: word === "Jeremy" ? "0.28em" : undefined }}
+                  initial={{ opacity: 0, y: 60, filter: "blur(10px)" }}
+                  animate={splashDone ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 60, filter: "blur(10px)" }}
+                  transition={{ duration: 0.85, delay: i * 0.16, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </span>
             <br />
-            {/* "Designer." */}
-            <motion.span
+
+            {/* Line 2: is [typewriter] */}
+            <span style={{ display: "inline-block", opacity: isJeremyHovered || isDesignerHovered ? 0.2 : 1, transition: "opacity 0.35s ease-in-out" }}>
+              <motion.span
+                className="italic text-[#c7ee4f] inline-block"
+                initial={{ opacity: 0, y: 60, filter: "blur(10px)" }}
+                animate={splashDone ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 60, filter: "blur(10px)" }}
+                transition={{ duration: 0.85, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              >
+                is {typedWord}<span className="tw-cursor">|</span>
+              </motion.span>
+            </span>
+            <br />
+
+            {/* Line 3: Designer. */}
+            <span
               ref={designerRef}
-              className="inline-block cursor-none"
+              className="cursor-none"
               data-cursor="hover"
-              animate={{ opacity: isJeremyHovered ? 0.2 : 1 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
+              style={{ display: "inline-block", opacity: isJeremyHovered ? 0.2 : 1, transition: "opacity 0.35s ease-in-out" }}
             >
-              Designer.
-            </motion.span>
+              <motion.span
+                className="inline-block"
+                initial={{ opacity: 0, y: 60, filter: "blur(10px)" }}
+                animate={splashDone ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 60, filter: "blur(10px)" }}
+                transition={{ duration: 0.85, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Designer.
+              </motion.span>
+            </span>
           </h1>
-        </motion.div>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={splashDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.66 }}
           className="w-full"
         >
           <p className="font-sans md:text-2xl text-foreground mb-8 font-extralight text-[20px]">He finds inspiration in capturing <span ref={momentsRef} className="cursor-none" data-cursor="hover">moments 📸</span>, appreciating <span ref={archRef} className="cursor-none" data-cursor="hover">architecture 🏛️</span>, and spending playful time with his <span ref={dogRef} className="cursor-none" data-cursor="hover">dog 🐶</span>.</p>
 
-          <button
-            onClick={scrollToProjects}
-            className="group flex items-center space-x-4 font-sans font-medium text-lg text-accent hover:text-accent/80 transition-colors"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={splashDone ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.82 }}
           >
-            <span>See His Work</span>
-            <motion.span
-              className="inline-block"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            <button
+              onClick={scrollToProjects}
+              className="group flex items-center space-x-4 font-sans font-medium text-lg text-accent hover:text-accent/80 transition-colors"
             >
-              ↓
-            </motion.span>
-          </button>
+              <span>See His Work</span>
+              <motion.span
+                className="inline-block"
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                ↓
+              </motion.span>
+            </button>
+          </motion.div>
         </motion.div>
       </div>
     </section>
