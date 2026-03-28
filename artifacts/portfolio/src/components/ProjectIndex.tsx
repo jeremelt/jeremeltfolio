@@ -14,9 +14,9 @@ const graphic6 = "/images/graphic-merry-christmas.jpg";
 
 const PROJECTS = [
   { id: "01", name: "Wannabee: Know Your True Self", platform: "Mobile App", category: "Design Challenge", locked: false, link: "https://jeremelt.notion.site/Design-Challenge-Wannabee-2ff5137bc09a80718c5dd852331d6e94" },
-  { id: "02", name: "Aloshop - Product Scraping", platform: "Web", category: "Product Design - Confidential", locked: true },
-  { id: "03", name: "Self-Service Warehouse Onboarding", platform: "Web", category: "Design Exploration - Confidential", locked: true },
-  { id: "04", name: "ERP Recruitment Process Redesign", platform: "Web", category: "Product Design - Confidential", locked: true },
+  { id: "02", name: "Aloshop - Product Scraping", platform: "Web", category: "Real Project - Shipper - Confidential", locked: true },
+  { id: "03", name: "Self-Service Warehouse Onboarding", platform: "Web", category: "Real Project - Shipper - Confidential", locked: true },
+  { id: "04", name: "ERP Recruitment Process Redesign", platform: "Web", category: "Real Project - REDComm - Confidential", locked: true },
 ];
 
 const SKETCHES = [
@@ -184,8 +184,9 @@ export function ProjectIndex() {
             </div>
 
             {PROJECTS.map((project, index) => {
-              const [categoryMain, categorySub] = project.category.includes(" - ")
-                ? project.category.split(" - ")
+              const lastDash = project.category.lastIndexOf(" - ");
+              const [categoryMain, categorySub] = lastDash !== -1
+                ? [project.category.slice(0, lastDash), project.category.slice(lastDash + 3)]
                 : [project.category, null];
 
               const sharedMotionProps = {
