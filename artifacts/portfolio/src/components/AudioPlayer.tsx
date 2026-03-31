@@ -155,20 +155,49 @@ export function AudioPlayer() {
           data-cursor="hover"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.93 }}
+          animate={autoplayBlocked ? { scale: [1, 1.08, 1] } : {}}
+          transition={autoplayBlocked ? { duration: 1.8, repeat: Infinity, ease: "easeInOut" } : {}}
           className="relative w-12 h-12 rounded-full flex items-center justify-center"
           style={{
             background: isPlaying ? "#C8F04E" : "rgba(20,20,20,0.92)",
-            border: `1px solid ${isPlaying ? "#C8F04E" : "#2e2e2e"}`,
+            border: `1px solid ${isPlaying ? "#C8F04E" : autoplayBlocked ? "#C8F04E66" : "#2e2e2e"}`,
             backdropFilter: "blur(12px)",
             boxShadow: isPlaying
               ? "0 0 24px rgba(200,240,78,0.35)"
+              : autoplayBlocked
+              ? "0 0 16px rgba(200,240,78,0.18)"
               : "0 4px 20px rgba(0,0,0,0.4)",
-            transition: "background 0.3s ease, box-shadow 0.3s ease",
+            transition: "background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
           }}
           aria-label={isPlaying ? "Pause background music" : "Play background music"}
         >
-          {isPlaying ? <PlayingIcon /> : <MutedIcon />}
+          {isPlaying ? <PlayingIcon /> : <MutedIcon highlight={autoplayBlocked} />}
         </motion.button>
+
+        {/* Tooltip hint when autoplay is blocked */}
+        <AnimatePresence>
+          {autoplayBlocked && !showVolume && (
+            <motion.div
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ delay: 1.5, duration: 0.4 }}
+              className="absolute right-14 bottom-0 pointer-events-none"
+            >
+              <div
+                className="whitespace-nowrap px-3 py-1.5 rounded-lg font-sans text-[11px] tracking-wide"
+                style={{
+                  background: "rgba(20,20,20,0.92)",
+                  border: "1px solid #2e2e2e",
+                  color: "#C8F04E",
+                  backdropFilter: "blur(12px)",
+                }}
+              >
+                ♪ Click to play music
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
@@ -197,18 +226,19 @@ function PlayingIcon() {
   );
 }
 
-function MutedIcon() {
+function MutedIcon({ highlight = false }: { highlight?: boolean }) {
+  const col = highlight ? "#C8F04E" : "#555";
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path
         d="M3 7.5h2.5L10 4v12l-4.5-3.5H3V7.5z"
-        fill="#555"
-        stroke="#555"
+        fill={col}
+        stroke={col}
         strokeWidth="0.5"
         strokeLinejoin="round"
       />
-      <line x1="13" y1="7" x2="17" y2="13" stroke="#555" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="17" y1="7" x2="13" y2="13" stroke="#555" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="13" y1="7" x2="17" y2="13" stroke={col} strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="17" y1="7" x2="13" y2="13" stroke={col} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
