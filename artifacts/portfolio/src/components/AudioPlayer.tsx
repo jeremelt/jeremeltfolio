@@ -14,13 +14,17 @@ export function AudioPlayer() {
     if (!audio) return;
     audio.volume = volume;
 
-    // Attempt immediate autoplay
-    audio.play().then(() => {
-      setIsPlaying(true);
-    }).catch(() => {
-      // Browser blocked autoplay — wait for first user gesture
-      setAutoplayBlocked(true);
-    });
+    // Attempt autoplay after 2 second delay
+    const timer = setTimeout(() => {
+      audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Browser blocked autoplay — wait for first user gesture
+        setAutoplayBlocked(true);
+      });
+    }, 2000);
+
+    return () => clearTimeout(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
