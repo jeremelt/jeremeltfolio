@@ -22,7 +22,7 @@ export function AudioPlayer() {
         // Browser blocked autoplay — wait for first user gesture
         setAutoplayBlocked(true);
       });
-    }, 3000);
+    }, 3500);
 
     return () => clearTimeout(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
